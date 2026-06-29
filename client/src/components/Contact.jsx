@@ -2,7 +2,7 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import LeadForm from './LeadForm';
 
 const info = [
-  { icon: FaPhone, label: 'Call Us', value: '(555) 123-4567', href: 'tel:+15551234567' },
+  { icon: FaPhone, label: 'Call Us', value: '0567601154', href: 'tel:+971567601154' },
   { icon: FaEnvelope, label: 'Email Us', value: 'info@centuriescontracting.com', href: 'mailto:info@centuriescontracting.com' },
   { icon: FaMapMarkerAlt, label: 'Visit Us', value: '123 Construction Ave, New York, NY 10001', href: '#' },
   { icon: FaClock, label: 'Business Hours', value: 'Mon – Fri: 8am – 6pm', href: null },

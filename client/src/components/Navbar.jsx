@@ -63,8 +63,8 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:+15551234567" className={`flex items-center gap-2 text-sm font-medium ${solid ? 'text-primary-600' : 'text-white'}`}>
-            <FaPhone className="text-xs" /> (555) 123-4567
+          <a href="tel:+971567601154" className={`flex items-center gap-2 text-sm font-medium ${solid ? 'text-primary-600' : 'text-white'}`}>
+            <FaPhone className="text-xs" /> 0567601154
           </a>
           <Link to="/quote" className="btn-primary text-sm py-2 px-4">
             Get Free Quote

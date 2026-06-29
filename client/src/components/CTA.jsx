@@ -17,7 +17,7 @@ export default function CTA() {
           <button onClick={() => scrollTo('#contact')} className="btn-primary bg-primary-500 hover:bg-primary-400 px-8 py-4 text-base">
             Get Free Estimate <FaArrowRight />
           </button>
-          <a href="tel:+15551234567" className="btn-outline border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-base">
+          <a href="tel:+971567601154" className="btn-outline border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-base">
             <FaPhone className="text-sm" /> Call Us Now
           </a>
         </div>
