@@ -417,14 +417,16 @@ export default function Admin() {
 function ApiHealth() {
   const BASE = apiUrl('');
 
+  const DIRECT = 'http://centuries.mypaperlessoffice.org:5020';
+
   const ENDPOINTS = [
-    { label: 'Static Projects JSON',   url: '/projects.json',              method: 'GET', isStatic: true },
-    { label: 'API: Projects',          url: apiUrl('/api/projects'),        method: 'GET' },
-    { label: 'API: Admin Stats',       url: apiUrl('/api/admin/stats'),     method: 'GET' },
-    { label: 'API: Admin Leads',       url: apiUrl('/api/admin/leads'),     method: 'GET' },
-    { label: 'API: Admin Trends',      url: apiUrl('/api/admin/trends?days=7'), method: 'GET' },
-    { label: 'API: Admin By-Service',  url: apiUrl('/api/admin/by-service'),method: 'GET' },
-    { label: 'API: Admin By-Status',   url: apiUrl('/api/admin/by-status'), method: 'GET' },
+    { label: 'Static Projects JSON',        url: '/projects.json',                           isStatic: true },
+    { label: 'Proxy → Admin Stats',         url: '/api/admin/stats' },
+    { label: 'Proxy → Admin Leads',         url: '/api/admin/leads' },
+    { label: 'Proxy → Admin Trends',        url: '/api/admin/trends?days=7' },
+    { label: 'Proxy → By-Service',          url: '/api/admin/by-service' },
+    { label: 'Direct server: Stats',        url: `${DIRECT}/api/admin/stats` },
+    { label: 'Direct server: Projects',     url: `${DIRECT}/api/projects` },
   ];
 
   const [results, setResults] = useState({});
