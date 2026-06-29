@@ -54,7 +54,7 @@ export default function Navbar() {
               {l.label}
             </button>
           ))}
-          <Link to="/gallery" className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Gallery</Link>
+          <button onClick={() => { navigate('/gallery'); window.scrollTo(0,0); }} className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Gallery</button>
         </nav>
 
         {/* CTA */}
@@ -76,13 +76,13 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div className={`lg:hidden transition-all duration-300 overflow-hidden ${open ? 'max-h-screen' : 'max-h-0'}`}>
         <nav className="bg-white shadow-lg px-6 py-4 flex flex-col gap-3">
-          <Link to="/" onClick={() => setOpen(false)} className="text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">Home</Link>
+          <button onClick={() => { setOpen(false); handleAnchor('#home'); }} className="text-left text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">Home</button>
           {anchorLinks.map(l => (
             <button key={l.href} onClick={() => handleAnchor(l.href)} className="text-left text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">
               {l.label}
             </button>
           ))}
-          <Link to="/gallery" onClick={() => setOpen(false)} className="text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">Gallery</Link>
+          <button onClick={() => { setOpen(false); navigate('/gallery'); window.scrollTo(0,0); }} className="text-left text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">Gallery</button>
           <Link to="/quote" onClick={() => setOpen(false)} className="btn-primary justify-center mt-2">
             Get Free Quote
           </Link>
