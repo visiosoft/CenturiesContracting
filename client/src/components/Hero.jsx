@@ -34,11 +34,11 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg text-white/80 mb-8 max-w-lg leading-relaxed">
-            Premium contracting services with unmatched craftsmanship. From commercial builds to residential renovations — we deliver on time, on budget, every time.
+            Premium fit-out and contracting services across Dubai. From luxury villa interiors to commercial spaces — we deliver on time, on budget, every time.
           </p>
 
           <ul className="space-y-2 mb-8">
-            {['Licensed & Fully Insured', 'Free Estimates', '10-Year Workmanship Warranty', '500+ Projects Completed'].map(item => (
+            {['Licensed & Fully Insured in UAE', 'Free Estimates', 'Quality Workmanship Guaranteed', '17+ Projects Completed in Dubai'].map(item => (
               <li key={item} className="flex items-center gap-2 text-white/90 text-sm">
                 <FaCheckCircle className="text-primary-300 flex-shrink-0" /> {item}
               </li>

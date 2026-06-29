@@ -5,12 +5,15 @@ import axios from 'axios';
 import { apiUrl } from '../lib/api';
 
 const services = [
-  'General Contracting',
-  'Commercial Construction',
-  'Residential Remodeling',
-  'Project Management',
-  'Design & Build',
-  'Renovation',
+  'Villa Fit-Out',
+  'Apartment Fit-Out',
+  'Office Fit-Out',
+  'Commercial Fit-Out',
+  'Interior Design & Build',
+  'Renovation & Remodeling',
+  'Joinery & Woodwork',
+  'Flooring & Tiling',
+  'Painting & Finishing',
   'Other',
 ];
 
