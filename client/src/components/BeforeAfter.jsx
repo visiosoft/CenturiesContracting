@@ -9,9 +9,9 @@ const PAIRS = [
     after:  { src: '/projects/Al-Fanar%20School/AUoB0s34.jpeg', alt: 'After' },
   },
   {
-    label: 'Apartment Fit-Out',
-    before: { src: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80', alt: 'Before fit-out' },
-    after:  { src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80', alt: 'After fit-out' },
+    label: 'Land Scape',
+    before: { src: '/projects/Land%20Scape/WhatsApp%20Image%202026-06-15%20at%206.17.06%20PM%20(2).jpeg', alt: 'Before' },
+    after:  { src: '/projects/Land%20Scape/WhatsApp%20Image%202026-06-15%20at%206.17.06%20PM%20(1).jpeg', alt: 'After' },
   },
   {
     label: 'Commercial Office Remodel',
