@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../lib/api';
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -13,11 +14,11 @@ import {
 const ADMIN_PASS = 'centuries2024';
 
 const STATUS_COLORS = {
-  new:       { bg: 'bg-blue-100',   text: 'text-blue-700',   dot: 'bg-blue-500'   },
+  new: { bg: 'bg-blue-100', text: 'text-blue-700', dot: 'bg-blue-500' },
   contacted: { bg: 'bg-yellow-100', text: 'text-yellow-700', dot: 'bg-yellow-500' },
   qualified: { bg: 'bg-purple-100', text: 'text-purple-700', dot: 'bg-purple-500' },
-  converted: { bg: 'bg-green-100',  text: 'text-green-700',  dot: 'bg-green-500'  },
-  lost:      { bg: 'bg-red-100',    text: 'text-red-700',    dot: 'bg-red-500'    },
+  converted: { bg: 'bg-green-100', text: 'text-green-700', dot: 'bg-green-500' },
+  lost: { bg: 'bg-red-100', text: 'text-red-700', dot: 'bg-red-500' },
 };
 
 const CHART_COLORS = ['#4F7A3A', '#6aaf42', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
@@ -35,9 +36,9 @@ function StatusBadge({ status }) {
 function StatCard({ icon: Icon, label, value, sub, trend, color = 'primary' }) {
   const colors = {
     primary: 'bg-primary-500 text-white',
-    blue:    'bg-blue-500 text-white',
-    yellow:  'bg-yellow-500 text-white',
-    green:   'bg-green-500 text-white',
+    blue: 'bg-blue-500 text-white',
+    yellow: 'bg-yellow-500 text-white',
+    green: 'bg-green-500 text-white',
   };
   return (
     <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
@@ -64,15 +65,15 @@ export default function Admin() {
   const [pass, setPass] = useState('');
   const [passErr, setPassErr] = useState('');
 
-  const [stats, setStats]     = useState(null);
-  const [trends, setTrends]   = useState([]);
+  const [stats, setStats] = useState(null);
+  const [trends, setTrends] = useState([]);
   const [byService, setByService] = useState([]);
-  const [bySource, setBySource]   = useState([]);
-  const [byStatus, setByStatus]   = useState([]);
-  const [leads, setLeads]     = useState([]);
+  const [bySource, setBySource] = useState([]);
+  const [byStatus, setByStatus] = useState([]);
+  const [leads, setLeads] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, pages: 1, total: 0 });
   const [trendDays, setTrendDays] = useState(30);
-  const [search, setSearch]   = useState('');
+  const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
@@ -82,12 +83,12 @@ export default function Admin() {
     setLoading(true);
     try {
       const [s, t, svc, src, st, l] = await Promise.all([
-        axios.get('/api/admin/stats'),
-        axios.get(`/api/admin/trends?days=${trendDays}`),
-        axios.get('/api/admin/by-service'),
-        axios.get('/api/admin/by-source'),
-        axios.get('/api/admin/by-status'),
-        axios.get(`/api/admin/leads?page=${pagination.page}&search=${search}&status=${filterStatus}`),
+        axios.get(apiUrl('/api/admin/stats')),
+        axios.get(apiUrl(`/api/admin/trends?days=${trendDays}`)),
+        axios.get(apiUrl('/api/admin/by-service')),
+        axios.get(apiUrl('/api/admin/by-source')),
+        axios.get(apiUrl('/api/admin/by-status')),
+        axios.get(apiUrl(`/api/admin/leads?page=${pagination.page}&search=${search}&status=${filterStatus}`)),
       ]);
       setStats(s.data);
       setTrends(t.data);
@@ -106,14 +107,14 @@ export default function Admin() {
   useEffect(() => { fetchAll(); }, [fetchAll]);
 
   const updateStatus = async (id, status) => {
-    await axios.patch(`/api/admin/leads/${id}`, { status });
+    await axios.patch(apiUrl(`/api/admin/leads/${id}`), { status });
     setLeads(ls => ls.map(l => l._id === id ? { ...l, status } : l));
     setStats(null); // trigger refresh
   };
 
   const deleteLead = async (id) => {
     if (!window.confirm('Delete this lead?')) return;
-    await axios.delete(`/api/admin/leads/${id}`);
+    await axios.delete(apiUrl(`/api/admin/leads/${id}`));
     setLeads(ls => ls.filter(l => l._id !== id));
   };
 
@@ -164,7 +165,7 @@ export default function Admin() {
           <div className="flex items-center gap-6">
             <span className="font-bold text-gray-900 text-sm hidden sm:block">Admin Dashboard</span>
             <nav className="flex gap-1">
-              {[['overview','Overview'], ['leads','Leads'], ['analytics','Analytics']].map(([id, label]) => (
+              {[['overview', 'Overview'], ['leads', 'Leads'], ['analytics', 'Analytics']].map(([id, label]) => (
                 <button key={id} onClick={() => setActiveTab(id)}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeTab === id ? 'bg-primary-50 text-primary-600' : 'text-gray-500 hover:text-gray-800'}`}>
                   {label}
@@ -190,10 +191,10 @@ export default function Admin() {
           <>
             {/* KPI cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatCard icon={FaUsers}     label="Total Leads"      value={stats?.total ?? '—'}         sub={`${stats?.newLeads ?? 0} unactioned`} trend={stats?.monthGrowth} color="primary" />
-              <StatCard icon={FaStar}      label="New This Month"   value={stats?.monthLeads ?? '—'}    sub={`vs ${stats?.lastMonthLeads ?? 0} last month`} trend={stats?.monthGrowth} color="blue" />
-              <StatCard icon={FaPhoneAlt}  label="Contacted"        value={stats?.contacted ?? '—'}     sub="Awaiting follow-up" color="yellow" />
-              <StatCard icon={FaCheckCircle} label="Converted"      value={stats?.converted ?? '—'}     sub={`${stats?.conversionRate ?? 0}% rate`} color="green" />
+              <StatCard icon={FaUsers} label="Total Leads" value={stats?.total ?? '—'} sub={`${stats?.newLeads ?? 0} unactioned`} trend={stats?.monthGrowth} color="primary" />
+              <StatCard icon={FaStar} label="New This Month" value={stats?.monthLeads ?? '—'} sub={`vs ${stats?.lastMonthLeads ?? 0} last month`} trend={stats?.monthGrowth} color="blue" />
+              <StatCard icon={FaPhoneAlt} label="Contacted" value={stats?.contacted ?? '—'} sub="Awaiting follow-up" color="yellow" />
+              <StatCard icon={FaCheckCircle} label="Converted" value={stats?.converted ?? '—'} sub={`${stats?.conversionRate ?? 0}% rate`} color="green" />
             </div>
 
             {/* Trend chart */}
@@ -227,7 +228,7 @@ export default function Admin() {
                 <h3 className="font-bold text-gray-900 mb-4">Leads by Service</h3>
                 <ResponsiveContainer width="100%" height={200}>
                   <PieChart>
-                    <Pie data={byService} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75} label={({ name, percent }) => `${name.split(' ')[0]} ${(percent*100).toFixed(0)}%`} labelLine={false} fontSize={10}>
+                    <Pie data={byService} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75} label={({ name, percent }) => `${name.split(' ')[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={10}>
                       {byService.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}
                     </Pie>
                     <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
@@ -299,7 +300,7 @@ export default function Admin() {
                 <select value={filterStatus} onChange={e => { setFilterStatus(e.target.value); setPagination(p => ({ ...p, page: 1 })); }}
                   className="input-field pl-9 pr-8 appearance-none">
                   <option value="">All Statuses</option>
-                  {Object.keys(STATUS_COLORS).map(s => <option key={s} value={s} className="capitalize">{s.charAt(0).toUpperCase()+s.slice(1)}</option>)}
+                  {Object.keys(STATUS_COLORS).map(s => <option key={s} value={s} className="capitalize">{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
                 </select>
               </div>
               <div className="text-sm text-gray-400 flex items-center whitespace-nowrap">
@@ -316,7 +317,7 @@ export default function Admin() {
                   className="px-3 py-1.5 text-sm rounded-lg border border-gray-200 disabled:opacity-40 hover:bg-gray-50">← Prev</button>
                 {[...Array(pagination.pages)].map((_, i) => (
                   <button key={i} onClick={() => setPagination(p => ({ ...p, page: i + 1 }))}
-                    className={`px-3 py-1.5 text-sm rounded-lg border ${pagination.page === i+1 ? 'bg-primary-500 text-white border-primary-500' : 'border-gray-200 hover:bg-gray-50'}`}>
+                    className={`px-3 py-1.5 text-sm rounded-lg border ${pagination.page === i + 1 ? 'bg-primary-500 text-white border-primary-500' : 'border-gray-200 hover:bg-gray-50'}`}>
                     {i + 1}
                   </button>
                 ))}
@@ -369,10 +370,10 @@ export default function Admin() {
                 <h3 className="font-bold text-gray-900 mb-4">Conversion Funnel</h3>
                 <div className="space-y-2">
                   {[
-                    { label: 'Total Leads',  value: stats?.total,     color: '#4F7A3A' },
-                    { label: 'Contacted',    value: stats?.contacted,  color: '#f59e0b' },
-                    { label: 'Qualified',    value: byStatus.find(s => s.name === 'qualified')?.value || 0, color: '#8b5cf6' },
-                    { label: 'Converted',    value: stats?.converted,  color: '#22c55e' },
+                    { label: 'Total Leads', value: stats?.total, color: '#4F7A3A' },
+                    { label: 'Contacted', value: stats?.contacted, color: '#f59e0b' },
+                    { label: 'Qualified', value: byStatus.find(s => s.name === 'qualified')?.value || 0, color: '#8b5cf6' },
+                    { label: 'Converted', value: stats?.converted, color: '#22c55e' },
                   ].map((row, i, arr) => {
                     const pct = arr[0].value > 0 ? ((row.value / arr[0].value) * 100).toFixed(0) : 0;
                     return (
@@ -429,7 +430,7 @@ function LeadsTable({ leads, onStatusChange, onDelete, compact }) {
             const hasDetails = lead.budget || lead.timeline || lead.address || lead.company || lead.howHeard || lead.preferredContact || lead.message;
             return (
               <React.Fragment key={lead._id}>
-              <tr className={`hover:bg-gray-50 transition-colors group border-b ${isOpen ? 'bg-primary-50/40 border-primary-100' : 'border-gray-50'}`}>
+                <tr className={`hover:bg-gray-50 transition-colors group border-b ${isOpen ? 'bg-primary-50/40 border-primary-100' : 'border-gray-50'}`}>
                   {/* Expand toggle */}
                   <td className="py-3 px-2 w-6">
                     {hasDetails && (
@@ -477,12 +478,12 @@ function LeadsTable({ leads, onStatusChange, onDelete, compact }) {
                     <td colSpan={8} className="px-4 pb-4 pt-2">
                       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
                         {[
-                          { label: 'Budget',            value: lead.budget },
-                          { label: 'Timeline',          value: lead.timeline },
-                          { label: 'Project Location',  value: lead.address },
-                          { label: 'How They Heard',    value: lead.howHeard },
+                          { label: 'Budget', value: lead.budget },
+                          { label: 'Timeline', value: lead.timeline },
+                          { label: 'Project Location', value: lead.address },
+                          { label: 'How They Heard', value: lead.howHeard },
                           { label: 'Preferred Contact', value: lead.preferredContact },
-                          { label: 'Company',           value: lead.company },
+                          { label: 'Company', value: lead.company },
                         ].filter(f => f.value).map(f => (
                           <div key={f.label} className="bg-white rounded-lg px-3 py-2 shadow-sm border border-primary-100">
                             <p className="text-xs text-gray-400 mb-0.5">{f.label}</p>

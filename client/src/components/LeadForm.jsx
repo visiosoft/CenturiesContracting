@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
 import axios from 'axios';
+import { apiUrl } from '../lib/api';
 
 const services = [
   'General Contracting',
@@ -26,7 +27,7 @@ export default function LeadForm({ compact = false }) {
     setError('');
     setLoading(true);
     try {
-      await axios.post('/api/leads', { ...form, source: compact ? 'hero-form' : 'contact-form' });
+      await axios.post(apiUrl('/api/leads'), { ...form, source: compact ? 'hero-form' : 'contact-form' });
       navigate('/thank-you');
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong. Please try again.');

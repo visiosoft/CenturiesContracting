@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaCheckCircle, FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
+import { apiUrl } from '../lib/api';
 
 const services = [
   'General Contracting',
@@ -57,7 +58,7 @@ export default function Quote() {
     setError('');
     setLoading(true);
     try {
-      await axios.post('/api/leads', { ...form, source: 'quote-page' });
+      await axios.post(apiUrl('/api/leads'), { ...form, source: 'quote-page' });
       navigate('/thank-you');
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong. Please try again.');

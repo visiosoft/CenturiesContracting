@@ -4,16 +4,17 @@ import {
   FaExpand, FaTimes, FaChevronLeft, FaChevronRight,
   FaArrowRight, FaPlay, FaImages, FaVideo, FaSpinner,
 } from 'react-icons/fa';
+import { apiUrl } from '../lib/api';
 
 const CATEGORIES = ['All', 'Villa', 'Apartment', 'Tower', 'Commercial', 'Landscape'];
 
 const CATEGORY_COLORS = {
-  Villa:      'bg-green-500',
-  Apartment:  'bg-blue-500',
-  Tower:      'bg-purple-500',
+  Villa: 'bg-green-500',
+  Apartment: 'bg-blue-500',
+  Tower: 'bg-purple-500',
   Commercial: 'bg-orange-500',
-  Landscape:  'bg-teal-500',
-  Other:      'bg-gray-500',
+  Landscape: 'bg-teal-500',
+  Other: 'bg-gray-500',
 };
 
 function isVideo(url) {
@@ -21,15 +22,15 @@ function isVideo(url) {
 }
 
 export default function Gallery() {
-  const [projects, setProjects]         = useState([]);
-  const [loading, setLoading]           = useState(true);
-  const [error, setError]               = useState('');
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
-  const [lightbox, setLightbox]         = useState(null); // { project, idx }
-  const [activeProject, setActiveProject]   = useState(null);
+  const [lightbox, setLightbox] = useState(null); // { project, idx }
+  const [activeProject, setActiveProject] = useState(null);
 
   useEffect(() => {
-    fetch('/api/projects')
+    fetch(apiUrl('/api/projects'))
       .then(r => { if (!r.ok) throw new Error('Failed to load projects'); return r.json(); })
       .then(data => { setProjects(data); setLoading(false); })
       .catch(e => { setError(e.message); setLoading(false); });
@@ -63,9 +64,9 @@ export default function Gallery() {
   useEffect(() => {
     if (!lightbox) return;
     const onKey = (e) => {
-      if (e.key === 'ArrowLeft')  lbPrev();
+      if (e.key === 'ArrowLeft') lbPrev();
       if (e.key === 'ArrowRight') lbNext();
-      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'Escape') closeLightbox();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -104,11 +105,10 @@ export default function Gallery() {
             <button
               key={c}
               onClick={() => setActiveCategory(c)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                activeCategory === c
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === c
                   ? 'bg-primary-500 text-white shadow'
                   : 'bg-white text-gray-600 hover:bg-primary-50 border border-gray-200'
-              }`}
+                }`}
             >
               {c}
               <span className="ml-1.5 text-xs opacity-60">({counts[c]})</span>
@@ -172,13 +172,13 @@ export default function Gallery() {
       {/* ── Lightbox ── */}
       {lightbox && (() => {
         const media = [...lightbox.project.images, ...lightbox.project.videos];
-        const src   = media[lightbox.idx];
-        const vid   = isVideo(src);
+        const src = media[lightbox.idx];
+        const vid = isVideo(src);
         const total = media.length;
         // windowed thumbnails: ±10 around current
         const winStart = Math.max(0, lightbox.idx - 10);
-        const winEnd   = Math.min(total, lightbox.idx + 11);
-        const thumbs   = media.slice(winStart, winEnd);
+        const winEnd = Math.min(total, lightbox.idx + 11);
+        const thumbs = media.slice(winStart, winEnd);
 
         return (
           <div
@@ -243,14 +243,13 @@ export default function Gallery() {
               >
                 {thumbs.map((m, i) => {
                   const realIdx = winStart + i;
-                  const active  = realIdx === lightbox.idx;
+                  const active = realIdx === lightbox.idx;
                   return (
                     <button
                       key={realIdx}
                       onClick={() => setLightbox(l => ({ ...l, idx: realIdx }))}
-                      className={`flex-shrink-0 w-14 h-10 rounded-lg overflow-hidden border-2 transition-all ${
-                        active ? 'border-primary-400 scale-105' : 'border-transparent opacity-50 hover:opacity-80'
-                      }`}
+                      className={`flex-shrink-0 w-14 h-10 rounded-lg overflow-hidden border-2 transition-all ${active ? 'border-primary-400 scale-105' : 'border-transparent opacity-50 hover:opacity-80'
+                        }`}
                     >
                       {isVideo(m) ? (
                         <div className="w-full h-full bg-gray-800 flex items-center justify-center">
