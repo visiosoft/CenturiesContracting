@@ -13,7 +13,7 @@ export default function About() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch('/api/projects')
+    fetch('/projects.json')
       .then(r => r.json())
       .then(data => {
         if (!Array.isArray(data)) return;

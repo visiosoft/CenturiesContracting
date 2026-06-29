@@ -12,7 +12,7 @@ export default function Projects() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {
-    fetch(apiUrl('/api/projects'))
+    fetch('/projects.json')
       .then(r => r.json())
       .then(data => { setProjects(Array.isArray(data) ? data : []); setLoading(false); })
       .catch(() => setLoading(false));

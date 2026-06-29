@@ -13,7 +13,7 @@ export default function Stats() {
   const [projectCount, setProjectCount] = useState(null);
 
   useEffect(() => {
-    fetch('/api/projects')
+    fetch('/projects.json')
       .then(r => r.json())
       .then(data => Array.isArray(data) && setProjectCount(data.length))
       .catch(() => {});

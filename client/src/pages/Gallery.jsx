@@ -30,7 +30,7 @@ export default function Gallery() {
   const [activeProject, setActiveProject] = useState(null);
 
   useEffect(() => {
-    fetch(apiUrl('/api/projects'))
+    fetch('/projects.json')
       .then(r => { if (!r.ok) throw new Error('Failed to load projects'); return r.json(); })
       .then(data => { setProjects(data); setLoading(false); })
       .catch(e => { setError(e.message); setLoading(false); });
