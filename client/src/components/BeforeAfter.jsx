@@ -4,9 +4,9 @@ import { useInView } from 'react-intersection-observer';
 // Pairs of before/after images — swap src values with real project photos
 const PAIRS = [
   {
-    label: 'Villa Interior Renovation',
-    before: { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', alt: 'Before renovation' },
-    after:  { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80', alt: 'After renovation' },
+    label: 'Al-Fanar School',
+    before: { src: '/projects/Al-Fanar%20School/WhatsApp%20Image%202026-06-15%20at%206.48.55%20PM%20(1).jpeg', alt: 'Before' },
+    after:  { src: '/projects/Al-Fanar%20School/AUoB0s34.jpeg', alt: 'After' },
   },
   {
     label: 'Apartment Fit-Out',
