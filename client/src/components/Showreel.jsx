@@ -9,12 +9,12 @@ const REELS = [
     sub: 'Villa Fit-Out',
   },
   {
-    src: '/projects/Arabian%20Ranches/2nd%20Reel%20SHORT.mp4',
+    src: 'https://res.cloudinary.com/dpfywvykx/video/upload/v1782699640/2nd_Reel_SHORT_mj1wwo.mp4',
     label: 'Interior Design',
     sub: 'Living Spaces',
   },
   {
-    src: '/projects/Arabian%20Ranches/3rd%20Reel%20SHORT.mp4',
+    src: 'https://res.cloudinary.com/dpfywvykx/video/upload/v1782699654/3rd_Reel_SHORT_aydisf.mp4',
     label: 'Finishing Works',
     sub: 'Detail & Craft',
   },
