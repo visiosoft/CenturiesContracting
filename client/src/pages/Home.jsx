@@ -3,6 +3,7 @@ import Stats from '../components/Stats';
 import Services from '../components/Services';
 import About from '../components/About';
 import Projects from '../components/Projects';
+import Showreel from '../components/Showreel';
 import BeforeAfter from '../components/BeforeAfter';
 import WhyUs from '../components/WhyUs';
 import Testimonials from '../components/Testimonials';
@@ -17,6 +18,7 @@ export default function Home() {
       <Services />
       <About />
       <Projects />
+      <Showreel />
       <BeforeAfter />
       <WhyUs />
       <Testimonials />
