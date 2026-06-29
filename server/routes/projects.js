@@ -3,7 +3,9 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
-const PROJECTS_DIR = path.join(__dirname, '../../client/projects');
+const PROJECTS_DIR = fs.existsSync(path.join(__dirname, '../../client/projects'))
+  ? path.join(__dirname, '../../client/projects')
+  : path.join(__dirname, '../../client/public/projects');
 const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
 const VIDEO_EXTS = new Set(['.mp4', '.mov', '.webm']);
 

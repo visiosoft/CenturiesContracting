@@ -14,14 +14,8 @@
   status = 200
   force = true
 
-# Proxy project images to Express backend
-[[redirects]]
-  from = "/projects/*"
-  to = "https://centuries.mypaperlessoffice.org/projects/:splat"
-  status = 200
-  force = true
-
 # SPA fallback — must be last
+# Note: /projects/* is served directly from client/public/projects/ by Netlify
 [[redirects]]
   from = "/*"
   to = "/index.html"
