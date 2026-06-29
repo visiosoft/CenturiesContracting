@@ -36,30 +36,30 @@ export default function Navbar() {
   const solid = scrolled || !isHome;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${solid ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${solid ? 'bg-white shadow-md py-2' : 'bg-cream-100/90 backdrop-blur-sm py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img src={centuriesLogo} alt="Centuries logo" className="h-10 w-auto object-contain" />
-          <span className={`text-xl font-bold transition-colors ${solid ? 'text-primary-600' : 'text-white'}`}>
+          <span className="text-xl font-bold text-primary-500 transition-colors">
             Centuries
           </span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-6">
-          <Link to="/" className={`text-sm font-medium transition-colors hover:text-primary-500 ${solid ? 'text-gray-700' : 'text-white/90'}`}>Home</Link>
+          <Link to="/" className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Home</Link>
           {anchorLinks.map(l => (
-            <button key={l.href} onClick={() => handleAnchor(l.href)} className={`text-sm font-medium transition-colors hover:text-primary-500 ${solid ? 'text-gray-700' : 'text-white/90'}`}>
+            <button key={l.href} onClick={() => handleAnchor(l.href)} className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">
               {l.label}
             </button>
           ))}
-          <Link to="/gallery" className={`text-sm font-medium transition-colors hover:text-primary-500 ${solid ? 'text-gray-700' : 'text-white/90'}`}>Gallery</Link>
+          <Link to="/gallery" className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Gallery</Link>
         </nav>
 
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:+971567601154" className={`flex items-center gap-2 text-sm font-medium ${solid ? 'text-primary-600' : 'text-white'}`}>
+          <a href="tel:+971567601154" className="flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">
             <FaPhone className="text-xs" /> 0567601154
           </a>
           <Link to="/quote" className="btn-primary text-sm py-2 px-4">
@@ -68,7 +68,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile toggle */}
-        <button className={`lg:hidden text-2xl ${solid ? 'text-gray-800' : 'text-white'}`} onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button className="lg:hidden text-2xl text-primary-500" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? <FaTimes /> : <FaBars />}
         </button>
       </div>
