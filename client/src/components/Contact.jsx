@@ -4,7 +4,7 @@ import LeadForm from './LeadForm';
 const info = [
   { icon: FaPhone, label: 'Call Us', value: '0567601154', href: 'tel:+971567601154' },
   { icon: FaEnvelope, label: 'Email Us', value: 'info@centuriescontracting.com', href: 'mailto:info@centuriescontracting.com' },
-  { icon: FaMapMarkerAlt, label: 'Visit Us', value: '123 Construction Ave, New York, NY 10001', href: '#' },
+  { icon: FaMapMarkerAlt, label: 'Visit Us', value: 'Al Quoz, Dubai, UAE', href: 'https://maps.google.com/?q=Al+Quoz+Dubai' },
   { icon: FaClock, label: 'Business Hours', value: 'Mon – Fri: 8am – 6pm', href: null },
 ];
 

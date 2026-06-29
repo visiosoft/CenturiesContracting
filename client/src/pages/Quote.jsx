@@ -105,7 +105,7 @@ export default function Quote() {
               { icon: FaPhone, label: 'Call us', value: '(555) 123-4567', href: 'tel:+15551234567' },
               { icon: FaEnvelope, label: 'Email us', value: 'info@centuriescontracting.com', href: 'mailto:info@centuriescontracting.com' },
               { icon: FaClock, label: 'Hours', value: 'Mon–Fri, 8am–6pm', href: null },
-              { icon: FaMapMarkerAlt, label: 'Office', value: '123 Construction Ave, NY', href: null },
+              { icon: FaMapMarkerAlt, label: 'Office', value: 'Al Quoz, Dubai, UAE', href: null },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
                 <div className="w-8 h-8 bg-primary-50 text-primary-500 rounded-lg flex items-center justify-center flex-shrink-0">

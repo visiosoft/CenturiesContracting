@@ -64,7 +64,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-3">
               <FaMapMarkerAlt className="text-primary-400 mt-0.5 flex-shrink-0" />
-              <span>123 Construction Ave, Suite 100<br />New York, NY 10001</span>
+              <span>Al Quoz, Dubai, UAE</span>
             </li>
             <li className="flex items-center gap-3">
               <FaPhone className="text-primary-400 flex-shrink-0" />
