@@ -7,8 +7,17 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background image + overlay */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80')] bg-cover bg-center" />
+      {/* Background video + overlay */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        poster="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80"
+      >
+        <source src="/projects/Arabian%20Ranches/1st%20Reel.mp4" type="video/mp4" />
+      </video>
       <div className="absolute inset-0 hero-gradient" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 grid lg:grid-cols-2 gap-12 items-center w-full">
