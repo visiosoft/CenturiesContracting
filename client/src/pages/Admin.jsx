@@ -165,7 +165,7 @@ export default function Admin() {
           <div className="flex items-center gap-6">
             <span className="font-bold text-gray-900 text-sm hidden sm:block">Admin Dashboard</span>
             <nav className="flex gap-1">
-              {[['overview', 'Overview'], ['leads', 'Leads'], ['analytics', 'Analytics'], ['projects', 'Projects']].map(([id, label]) => (
+              {[['overview', 'Overview'], ['leads', 'Leads'], ['analytics', 'Analytics'], ['projects', 'Projects'], ['health', '🔌 API Health']].map(([id, label]) => (
                 <button key={id} onClick={() => setActiveTab(id)}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeTab === id ? 'bg-primary-50 text-primary-600' : 'text-gray-500 hover:text-gray-800'}`}>
                   {label}
@@ -405,7 +405,92 @@ export default function Admin() {
           <ProjectsManager />
         )}
 
+        {activeTab === 'health' && (
+          <ApiHealth />
+        )}
+
       </div>
+    </div>
+  );
+}
+
+function ApiHealth() {
+  const BASE = apiUrl('');
+
+  const ENDPOINTS = [
+    { label: 'Static Projects JSON',   url: '/projects.json',              method: 'GET', isStatic: true },
+    { label: 'API: Projects',          url: apiUrl('/api/projects'),        method: 'GET' },
+    { label: 'API: Admin Stats',       url: apiUrl('/api/admin/stats'),     method: 'GET' },
+    { label: 'API: Admin Leads',       url: apiUrl('/api/admin/leads'),     method: 'GET' },
+    { label: 'API: Admin Trends',      url: apiUrl('/api/admin/trends?days=7'), method: 'GET' },
+    { label: 'API: Admin By-Service',  url: apiUrl('/api/admin/by-service'),method: 'GET' },
+    { label: 'API: Admin By-Status',   url: apiUrl('/api/admin/by-status'), method: 'GET' },
+  ];
+
+  const [results, setResults] = useState({});
+  const [running, setRunning] = useState(false);
+
+  const runAll = async () => {
+    setRunning(true);
+    setResults({});
+    for (const ep of ENDPOINTS) {
+      const start = Date.now();
+      try {
+        const res = await fetch(ep.url, {
+          headers: ep.isStatic ? {} : { 'x-admin-key': 'centuries2024' },
+        });
+        const ms = Date.now() - start;
+        let body = '';
+        try { body = JSON.stringify(await res.json(), null, 2); } catch {}
+        setResults(r => ({ ...r, [ep.label]: { ok: res.ok, status: res.status, ms, body: body.slice(0, 300) } }));
+      } catch (err) {
+        setResults(r => ({ ...r, [ep.label]: { ok: false, status: 'ERR', ms: Date.now() - start, body: err.message } }));
+      }
+    }
+    setRunning(false);
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto p-6 space-y-4">
+      <div className="flex items-center justify-between mb-2">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">API Health Check</h2>
+          <p className="text-sm text-gray-500 mt-0.5">Base: <code className="bg-gray-100 px-1 rounded">{BASE || window.location.origin}</code></p>
+        </div>
+        <button onClick={runAll} disabled={running}
+          className="btn-primary">
+          {running ? '⏳ Testing...' : '▶ Run All Tests'}
+        </button>
+      </div>
+
+      {ENDPOINTS.map(ep => {
+        const r = results[ep.label];
+        return (
+          <div key={ep.label} className="bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <span className="font-medium text-gray-800">{ep.label}</span>
+                <code className="ml-2 text-xs text-gray-400">{ep.url}</code>
+              </div>
+              {r ? (
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-gray-400">{r.ms}ms</span>
+                  <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${r.ok ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                    {r.ok ? '✅' : '❌'} {r.status}
+                  </span>
+                </div>
+              ) : (
+                <span className="text-xs text-gray-300">{running ? '⏳' : '—'}</span>
+              )}
+            </div>
+            {r?.body && (
+              <pre className={`text-xs rounded-lg p-3 overflow-x-auto mt-2 ${r.ok ? 'bg-green-50 text-green-900' : 'bg-red-50 text-red-900'}`}>
+                {r.body}
+              </pre>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
