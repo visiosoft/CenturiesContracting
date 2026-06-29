@@ -427,7 +427,7 @@ function ProjectsManager() {
   const fetchProjects = async () => {
     setLoading(true);
     try {
-      const r = await fetch('/api/projects');
+      const r = await fetch('/projects.json');
       const data = await r.json();
       setProjects(Array.isArray(data) ? data : []);
     } catch {}
