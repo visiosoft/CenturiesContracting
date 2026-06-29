@@ -7,7 +7,10 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply font-sans text-gray-800 antialiased;
+    @apply font-sans text-primary-500 antialiased bg-white;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif;
   }
 }
 
@@ -19,20 +22,19 @@
     @apply border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
   }
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+    @apply text-3xl md:text-4xl font-bold font-serif text-primary-500 mb-4;
   }
   .section-subtitle {
-    @apply text-lg text-gray-500 max-w-2xl mx-auto;
+    @apply text-lg text-gray-500 max-w-2xl mx-auto font-sans;
   }
   .card {
     @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6;
   }
   .input-field {
-    @apply w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all duration-200;
+    @apply w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-300 focus:border-transparent transition-all duration-200 bg-gray-50;
   }
 }
 
-/* Smooth fade-in animation */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -41,7 +43,6 @@
   animation: fadeInUp 0.6s ease both;
 }
 
-/* Hero gradient overlay */
 .hero-gradient {
-  background: linear-gradient(135deg, rgba(79,122,58,0.92) 0%, rgba(30,48,21,0.85) 100%);
+  background: linear-gradient(135deg, rgba(26,53,53,0.88) 0%, rgba(5,11,11,0.80) 100%);
 }

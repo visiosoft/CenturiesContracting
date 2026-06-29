@@ -41,10 +41,10 @@ export default function LeadForm({ compact = false }) {
 
   return (
     <div className={`bg-white rounded-2xl shadow-2xl p-6 sm:p-8 ${compact ? 'max-w-md w-full mx-auto' : 'w-full'}`}>
-      <h3 className="text-xl font-bold text-gray-900 mb-1">
+      <h3 className="font-serif text-2xl font-bold text-primary-500 mb-1">
         {compact ? 'Get Your Free Quote' : 'Send Us a Message'}
       </h3>
-      <p className="text-gray-500 text-sm mb-5">
+      <p className="text-gray-400 text-sm mb-5 font-sans">
         {compact ? 'Fill in the form and we\'ll call you within 24 hours.' : 'We\'d love to hear about your project.'}
       </p>
 
