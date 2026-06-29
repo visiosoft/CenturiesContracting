@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaPhone } from 'react-icons/fa';
+import centuriesLogo from '../assets/Centuries-transparent.png';
 
 const anchorLinks = [
   { label: 'Services', href: '#services' },
@@ -39,12 +40,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-9 h-9 bg-primary-500 rounded-lg flex items-center justify-center">
-            <svg viewBox="0 0 40 40" className="w-6 h-6" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 6 C20 6, 9 11, 9 22 C9 30, 20 34, 20 34 C20 34, 31 30, 31 22 C31 11, 20 6, 20 6Z" />
-              <path d="M20 34 L20 6" />
-            </svg>
-          </div>
+          <img src={centuriesLogo} alt="Centuries logo" className="h-10 w-auto object-contain" />
           <span className={`text-xl font-bold transition-colors ${solid ? 'text-primary-600' : 'text-white'}`}>
             Centuries
           </span>

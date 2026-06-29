@@ -1,4 +1,5 @@
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import centuriesLogo from '../assets/Centuries-transparent.png';
 
 const services = ['General Contracting', 'Commercial Construction', 'Residential Remodeling', 'Project Management', 'Design & Build', 'Renovation'];
 
@@ -14,12 +15,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-9 h-9 bg-primary-500 rounded-lg flex items-center justify-center flex-shrink-0">
-              <svg viewBox="0 0 40 40" className="w-6 h-6" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 6 C20 6, 9 11, 9 22 C9 30, 20 34, 20 34 C20 34, 31 30, 31 22 C31 11, 20 6, 20 6Z" />
-                <path d="M20 34 L20 6" />
-              </svg>
-            </div>
+            <img src={centuriesLogo} alt="Centuries logo" className="h-10 w-auto object-contain flex-shrink-0" />
             <span className="text-white font-bold text-xl">Centuries</span>
           </div>
           <p className="text-sm leading-relaxed mb-5">
