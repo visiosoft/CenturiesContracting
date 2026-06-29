@@ -16,7 +16,7 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full object-cover"
         poster="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80"
       >
-        <source src="/projects/Arabian%20Ranches/1st%20Reel.mp4" type="video/mp4" />
+        <source src="/projects/Arabian%20Ranches/3rd%20Reel%20SHORT.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 hero-gradient" />
 
