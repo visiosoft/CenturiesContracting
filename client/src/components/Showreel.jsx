@@ -4,7 +4,7 @@ import { FaVolumeMute, FaVolumeUp, FaExpand } from 'react-icons/fa';
 
 const REELS = [
   {
-    src: '/projects/Arabian%20Ranches/1st%20Reel.mp4',
+    src: 'https://res.cloudinary.com/dpfywvykx/video/upload/v1782699633/1st_Reel_ol6l9c.mp4',
     label: 'Arabian Ranches',
     sub: 'Villa Fit-Out',
   },
