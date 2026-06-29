@@ -28,6 +28,7 @@ app.use('/api/leads', require('./routes/leads'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/projects', require('./routes/projects'));
+app.use('/api/admin/projects', require('./routes/adminProjects'));
 
 app.get('/api/health', (req, res) => res.json({
   status: 'ok',

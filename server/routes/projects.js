@@ -67,10 +67,16 @@ router.get('/', (req, res) => {
         path.join(PROJECTS_DIR, folder),
         baseUrl
       );
+      // Read category from .meta.json (admin-created) or fall back to hardcoded map
+      let category = CATEGORY_MAP[folder] || 'Other';
+      try {
+        const meta = JSON.parse(fs.readFileSync(path.join(PROJECTS_DIR, folder, '.meta.json'), 'utf8'));
+        if (meta.category) category = meta.category;
+      } catch {}
       return {
         id: i + 1,
         title: folder,
-        category: CATEGORY_MAP[folder] || 'Other',
+        category,
         thumbnail: images[0] || null,
         images,
         videos,

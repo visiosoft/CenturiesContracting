@@ -165,7 +165,7 @@ export default function Admin() {
           <div className="flex items-center gap-6">
             <span className="font-bold text-gray-900 text-sm hidden sm:block">Admin Dashboard</span>
             <nav className="flex gap-1">
-              {[['overview', 'Overview'], ['leads', 'Leads'], ['analytics', 'Analytics']].map(([id, label]) => (
+              {[['overview', 'Overview'], ['leads', 'Leads'], ['analytics', 'Analytics'], ['projects', 'Projects']].map(([id, label]) => (
                 <button key={id} onClick={() => setActiveTab(id)}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${activeTab === id ? 'bg-primary-50 text-primary-600' : 'text-gray-500 hover:text-gray-800'}`}>
                   {label}
@@ -399,7 +399,257 @@ export default function Admin() {
             </div>
           </div>
         )}
+
+        {/* ── PROJECTS TAB ── */}
+        {activeTab === 'projects' && (
+          <ProjectsManager />
+        )}
+
       </div>
+    </div>
+  );
+}
+
+function ProjectsManager() {
+  const ADMIN_KEY = 'centuries2024';
+  const CATEGORIES = ['Villa', 'Apartment', 'Tower', 'Commercial', 'Landscape', 'Other'];
+
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState({ name: '', category: 'Villa' });
+  const [files, setFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState('');
+  const [addingTo, setAddingTo] = useState(null); // project name for adding images
+  const [addFiles, setAddFiles] = useState([]);
+
+  const fetchProjects = async () => {
+    setLoading(true);
+    try {
+      const r = await fetch('/api/projects');
+      const data = await r.json();
+      setProjects(Array.isArray(data) ? data : []);
+    } catch {}
+    setLoading(false);
+  };
+
+  useEffect(() => { fetchProjects(); }, []);
+
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    if (!form.name.trim()) return;
+    setUploading(true);
+    setUploadProgress('Uploading...');
+    const fd = new FormData();
+    fd.append('name', form.name.trim());
+    fd.append('category', form.category);
+    Array.from(files).forEach(f => fd.append('images', f));
+    try {
+      const r = await fetch('/api/admin/projects', {
+        method: 'POST',
+        headers: { 'x-admin-key': ADMIN_KEY },
+        body: fd,
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+      setUploadProgress(`✅ Created "${form.name}" with ${data.files} files`);
+      setForm({ name: '', category: 'Villa' });
+      setFiles([]);
+      setShowForm(false);
+      fetchProjects();
+    } catch (err) {
+      setUploadProgress(`❌ ${err.message}`);
+    }
+    setUploading(false);
+  };
+
+  const handleAddImages = async (e) => {
+    e.preventDefault();
+    if (!addingTo || !addFiles.length) return;
+    setUploading(true);
+    setUploadProgress('Uploading images...');
+    const fd = new FormData();
+    fd.append('name', addingTo);
+    Array.from(addFiles).forEach(f => fd.append('images', f));
+    try {
+      const r = await fetch(`/api/admin/projects/${encodeURIComponent(addingTo)}/images`, {
+        method: 'POST',
+        headers: { 'x-admin-key': ADMIN_KEY },
+        body: fd,
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+      setUploadProgress(`✅ Added ${data.files} images to "${addingTo}"`);
+      setAddingTo(null);
+      setAddFiles([]);
+      fetchProjects();
+    } catch (err) {
+      setUploadProgress(`❌ ${err.message}`);
+    }
+    setUploading(false);
+  };
+
+  const handleDelete = async (name) => {
+    if (!window.confirm(`Delete project "${name}" and all its images? This cannot be undone.`)) return;
+    try {
+      await fetch(`/api/admin/projects/${encodeURIComponent(name)}`, {
+        method: 'DELETE',
+        headers: { 'x-admin-key': ADMIN_KEY },
+      });
+      fetchProjects();
+    } catch {}
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-bold text-gray-900">Gallery Projects</h2>
+          <p className="text-sm text-gray-400">{projects.length} projects · manage images shown in the gallery</p>
+        </div>
+        <button
+          onClick={() => { setShowForm(v => !v); setUploadProgress(''); }}
+          className="flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors shadow"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+          Add Project
+        </button>
+      </div>
+
+      {/* Status message */}
+      {uploadProgress && (
+        <div className={`px-4 py-3 rounded-xl text-sm font-medium ${uploadProgress.startsWith('✅') ? 'bg-green-50 text-green-700 border border-green-200' : uploadProgress.startsWith('❌') ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-blue-50 text-blue-700 border border-blue-200'}`}>
+          {uploadProgress}
+        </div>
+      )}
+
+      {/* Create project form */}
+      {showForm && (
+        <form onSubmit={handleCreate} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-4">
+          <h3 className="font-semibold text-gray-900">New Project</h3>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Project Name *</label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                placeholder="e.g. Palm Jumeirah Villa"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Category *</label>
+              <select
+                value={form.category}
+                onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400"
+              >
+                {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Images / Videos (optional — you can add later)</label>
+            <input
+              type="file"
+              multiple
+              accept="image/*,video/mp4,video/quicktime"
+              onChange={e => setFiles(e.target.files)}
+              className="block w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+            />
+            {files.length > 0 && <p className="text-xs text-gray-400 mt-1">{files.length} file(s) selected</p>}
+          </div>
+          <div className="flex gap-2 pt-1">
+            <button type="submit" disabled={uploading}
+              className="bg-primary-500 hover:bg-primary-600 disabled:opacity-50 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors">
+              {uploading ? 'Uploading...' : 'Create Project'}
+            </button>
+            <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 transition-colors">
+              Cancel
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* Add images to existing project */}
+      {addingTo && (
+        <form onSubmit={handleAddImages} className="bg-blue-50 border border-blue-200 rounded-2xl p-5 space-y-3">
+          <h3 className="font-semibold text-gray-900 text-sm">Add images to <span className="text-primary-600">"{addingTo}"</span></h3>
+          <input
+            type="file"
+            multiple
+            accept="image/*,video/mp4,video/quicktime"
+            onChange={e => setAddFiles(e.target.files)}
+            className="block w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-white file:text-primary-700 hover:file:bg-primary-50"
+            required
+          />
+          {addFiles.length > 0 && <p className="text-xs text-gray-500">{addFiles.length} file(s) selected</p>}
+          <div className="flex gap-2">
+            <button type="submit" disabled={uploading}
+              className="bg-primary-500 hover:bg-primary-600 disabled:opacity-50 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+              {uploading ? 'Uploading...' : 'Upload Images'}
+            </button>
+            <button type="button" onClick={() => { setAddingTo(null); setAddFiles([]); }} className="px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-white transition-colors">
+              Cancel
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* Projects grid */}
+      {loading ? (
+        <div className="flex justify-center py-16">
+          <div className="w-8 h-8 border-4 border-primary-200 border-t-primary-500 rounded-full animate-spin" />
+        </div>
+      ) : projects.length === 0 ? (
+        <div className="text-center py-16 text-gray-400">
+          <svg className="w-12 h-12 mx-auto mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          <p className="text-sm">No projects yet. Click "Add Project" to create one.</p>
+        </div>
+      ) : (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {projects.map(p => (
+            <div key={p.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden group">
+              {/* Thumbnail */}
+              <div className="relative h-44 bg-gray-100">
+                {p.thumbnail ? (
+                  <img src={p.thumbnail} alt={p.title} className="w-full h-full object-cover" loading="lazy" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-300">
+                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  </div>
+                )}
+                <span className="absolute top-2 right-2 bg-primary-500 text-white text-xs px-2.5 py-0.5 rounded-full font-medium">{p.category}</span>
+              </div>
+              {/* Info */}
+              <div className="p-4">
+                <h3 className="font-semibold text-gray-900 text-sm truncate mb-0.5">{p.title}</h3>
+                <p className="text-xs text-gray-400 mb-3">
+                  {p.images?.length || 0} photos{p.videos?.length > 0 ? ` · ${p.videos.length} videos` : ''}
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => { setAddingTo(p.title); setUploadProgress(''); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="flex-1 text-xs font-medium bg-primary-50 text-primary-700 hover:bg-primary-100 px-3 py-1.5 rounded-lg transition-colors"
+                  >
+                    + Add Images
+                  </button>
+                  <button
+                    onClick={() => handleDelete(p.title)}
+                    className="text-xs font-medium bg-red-50 text-red-600 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
