@@ -16,7 +16,7 @@ export default function Hero() {
         <div className="text-white animate-fadeInUp">
           <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6">
             <FaStar className="text-yellow-400 text-xs" />
-            <span>Trusted by 500+ clients across North America</span>
+            <span>Trusted by 50+ clients across United Arab Emirates</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
