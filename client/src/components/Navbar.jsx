@@ -39,16 +39,16 @@ export default function Navbar() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${solid ? 'bg-white shadow-md py-2' : 'bg-cream-100/90 backdrop-blur-sm py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
+        <button onClick={() => handleAnchor('#home')} className="flex items-center gap-2">
           <img src={centuriesLogo} alt="Centuries logo" className="h-10 w-auto object-contain" />
           <span className="text-xl font-bold text-primary-500 transition-colors">
             Centuries
           </span>
-        </Link>
+        </button>
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-6">
-          <Link to="/" className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Home</Link>
+          <button onClick={() => handleAnchor('#home')} className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Home</button>
           {anchorLinks.map(l => (
             <button key={l.href} onClick={() => handleAnchor(l.href)} className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">
               {l.label}
