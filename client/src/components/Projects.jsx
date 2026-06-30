@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
-import { apiUrl } from '../lib/api';
+import { FaArrowRight } from 'react-icons/fa';
 
 const CATEGORIES = ['All', 'Villa', 'Apartment', 'Tower', 'Commercial', 'Landscape'];
 
@@ -22,21 +22,32 @@ export default function Projects() {
   const visible = filtered.slice(0, 6);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-primary-500 font-semibold text-sm uppercase tracking-widest">Our Portfolio</span>
-          <h2 className="section-title mt-2">Projects That Speak for Themselves</h2>
-          <p className="section-subtitle mx-auto">Browse our completed projects across villas, apartments, towers, and commercial spaces.</p>
+    <section id="projects" className="py-24 bg-dark-900">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+          <div>
+            <div className="flex items-center gap-4 mb-4">
+              <span className="gold-line" />
+              <span className="text-gold-400 text-xs tracking-[0.3em] uppercase font-sans">Our Portfolio</span>
+            </div>
+            <h2 className="section-title">Projects That Speak<br />for Themselves</h2>
+          </div>
+          <Link to="/gallery" className="btn-outline self-start lg:self-auto whitespace-nowrap">
+            View Full Gallery <FaArrowRight className="text-xs" />
+          </Link>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        {/* Category filters */}
+        <div className="flex flex-wrap gap-2 mb-10">
           {CATEGORIES.map(c => (
             <button
               key={c}
               onClick={() => setActive(c)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${active === c ? 'bg-primary-500 text-white shadow' : 'bg-white text-gray-600 hover:bg-primary-50 border border-gray-200'}`}
+              className={`px-5 py-2 text-xs tracking-widest uppercase font-sans transition-all duration-200 ${
+                active === c
+                  ? 'bg-gold-400 text-dark-900'
+                  : 'border border-dark-600 text-warm-500 hover:border-gold-400 hover:text-gold-400'
+              }`}
             >
               {c}
             </button>
@@ -45,61 +56,42 @@ export default function Projects() {
 
         {loading ? (
           <div className="flex justify-center py-20">
-            <div className="w-10 h-10 border-4 border-primary-200 border-t-primary-500 rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-dark-600 border-t-gold-400 rounded-full animate-spin" />
           </div>
         ) : (
-          <>
-            <div ref={ref} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {visible.map((p, i) => (
-                <Link
-                  to="/gallery"
-                  key={p.id}
-                  className={`group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 block ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                  style={{ transitionDelay: `${i * 80}ms` }}
-                >
-                  <div className="relative overflow-hidden h-52 sm:h-56 bg-gray-200">
-                    {p.thumbnail ? (
-                      <img
-                        src={p.thumbnail}
-                        alt={p.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">No image</div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="absolute top-3 right-3 bg-primary-500 text-white text-xs px-3 py-1 rounded-full">{p.category}</span>
-                    {(p.images?.length > 0 || p.videos?.length > 0) && (
-                      <span className="absolute bottom-3 left-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                        {p.images?.length || 0} photos{p.videos?.length > 0 ? ` · ${p.videos.length} videos` : ''}
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-5 bg-white">
-                    <h3 className="font-semibold text-gray-900 mb-1 truncate">{p.title}</h3>
-                    <p className="text-gray-400 text-sm">{p.category} Project · Dubai</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {/* View all button */}
-            <div className="text-center mt-10">
+          <div ref={ref} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-dark-700">
+            {visible.map((p, i) => (
               <Link
                 to="/gallery"
-                className="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-8 py-3 rounded-full font-semibold transition-colors shadow-md hover:shadow-lg"
+                key={p.id}
+                className={`group bg-dark-900 overflow-hidden block transition-all duration-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: `${i * 80}ms` }}
               >
-                View Full Portfolio
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <div className="relative overflow-hidden h-56 bg-dark-800">
+                  {p.thumbnail ? (
+                    <img
+                      src={p.thumbnail}
+                      alt={p.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-warm-600 text-xs">No image</div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent" />
+                  <span className="absolute top-3 left-3 border border-gold-400 text-gold-400 text-xs px-2 py-0.5 tracking-widest uppercase font-sans">{p.category}</span>
+                </div>
+                <div className="p-5 border-b border-dark-700 group-hover:border-gold-400 transition-colors duration-300">
+                  <h3 className="font-serif font-light text-warm-300 tracking-wide mb-1">{p.title}</h3>
+                  <p className="text-warm-600 text-xs font-sans tracking-wide">{p.images?.length || 0} photos{p.videos?.length > 0 ? ` · ${p.videos.length} videos` : ''}</p>
+                </div>
               </Link>
-              {filtered.length > 6 && (
-                <p className="text-gray-400 text-sm mt-3">{filtered.length - 6} more projects in gallery</p>
-              )}
-            </div>
-          </>
+            ))}
+          </div>
+        )}
+
+        {filtered.length > 6 && (
+          <p className="text-warm-600 text-xs text-center mt-6 tracking-widest font-sans">{filtered.length - 6} more projects in gallery</p>
         )}
       </div>
     </section>

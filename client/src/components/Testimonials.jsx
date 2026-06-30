@@ -1,35 +1,31 @@
 import { useState } from 'react';
-import { FaStar, FaQuoteLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaQuoteLeft, FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
 
 const testimonials = [
   {
-    name: 'Michael Carter',
-    role: 'CEO, Carter Industries',
-    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+    name: 'Mohammed Al Rashid',
+    role: 'Villa Owner, Arabian Ranches',
     rating: 5,
-    text: "Centuries Contracting transformed our aging headquarters into a state-of-the-art facility. They finished two weeks ahead of schedule and under budget. I couldn't be more impressed.",
+    text: "Centuries delivered our villa fit-out beyond every expectation. The attention to detail, quality of materials, and professionalism of the team were outstanding. Truly a luxury experience.",
   },
   {
-    name: 'Sarah Johnson',
-    role: 'Homeowner, Greenwich CT',
-    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+    name: 'Sarah Al Mansouri',
+    role: 'Property Developer, Dubai',
     rating: 5,
-    text: "Our kitchen and master suite renovation exceeded every expectation. The team was professional, clean, and communicative throughout. This is a company that truly cares.",
+    text: "I've worked with many contractors in Dubai. Centuries is hands-down the best — quality craftsmanship, transparent pricing, and they never cut corners. My go-to for every project.",
   },
   {
-    name: 'David Park',
-    role: 'Property Developer',
-    avatar: 'https://randomuser.me/api/portraits/men/65.jpg',
+    name: 'Ahmed Hassan',
+    role: 'Business Owner, JBR',
     rating: 5,
-    text: "I've worked with many contractors over the years. Centuries is hands-down the best — quality craftsmanship, transparent pricing, and they never cut corners. My go-to for every project.",
+    text: "Our office fit-out was completed on time and exactly on budget. The team communicated every step clearly. We've already commissioned them for our second location.",
   },
   {
-    name: 'Amanda Torres',
-    role: 'Hotel General Manager',
-    avatar: 'https://randomuser.me/api/portraits/women/28.jpg',
+    name: 'Fatima Al Zahra',
+    role: 'Homeowner, Dubai Hills',
     rating: 5,
-    text: "The historic restoration of our boutique hotel was flawless. Centuries honored the original architecture while adding modern amenities our guests love. Truly exceptional work.",
+    text: "The interior design and build team transformed our apartment into something from a magazine. Exceptional taste, premium materials, and a seamless process start to finish.",
   },
 ];
 
@@ -38,62 +34,60 @@ export default function Testimonials() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const prev = () => setIdx(i => (i - 1 + testimonials.length) % testimonials.length);
   const next = () => setIdx(i => (i + 1) % testimonials.length);
-  const t = testimonials[idx];
 
   return (
-    <section id="testimonials" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <span className="text-primary-500 font-semibold text-sm uppercase tracking-widest">Testimonials</span>
-          <h2 className="section-title mt-2">What Our Clients Say</h2>
+    <section id="testimonials" className="py-24 bg-dark-900">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex items-center gap-4 mb-4">
+          <span className="gold-line" />
+          <span className="text-gold-400 text-xs tracking-[0.3em] uppercase font-sans">Testimonials</span>
         </div>
+        <h2 className="section-title mb-16">What Our Clients Say</h2>
 
-        {/* Desktop: grid */}
-        <div ref={ref} className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Desktop grid */}
+        <div ref={ref} className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-dark-700">
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className={`card border border-gray-100 transition-all duration-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`bg-dark-900 p-7 hover:bg-dark-800 transition-all duration-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
-              <FaQuoteLeft className="text-primary-200 text-2xl mb-3" />
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">"{t.text}"</p>
-              <div className="flex gap-0.5 mb-3">
-                {[...Array(t.rating)].map((_, j) => <FaStar key={j} className="text-yellow-400 text-xs" />)}
+              <FaQuoteLeft className="text-gold-400 opacity-40 text-xl mb-5" />
+              <p className="text-warm-500 text-xs leading-relaxed mb-6 font-sans">"{t.text}"</p>
+              <div className="flex gap-0.5 mb-4">
+                {[...Array(t.rating)].map((_, j) => <FaStar key={j} className="text-gold-400 text-xs" />)}
               </div>
-              <div className="flex items-center gap-3 mt-auto">
-                <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
-                <div>
-                  <p className="font-semibold text-gray-900 text-sm">{t.name}</p>
-                  <p className="text-gray-400 text-xs">{t.role}</p>
-                </div>
+              <div className="border-t border-dark-700 pt-4">
+                <p className="font-serif font-light text-warm-300 text-sm tracking-wide">{t.name}</p>
+                <p className="text-warm-600 text-xs font-sans mt-0.5">{t.role}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Mobile: carousel */}
+        {/* Mobile carousel */}
         <div className="md:hidden">
-          <div className="card border border-gray-100 text-center">
-            <FaQuoteLeft className="text-primary-200 text-2xl mb-4 mx-auto" />
-            <p className="text-gray-600 text-sm leading-relaxed mb-4">"{t.text}"</p>
-            <div className="flex justify-center gap-0.5 mb-4">
-              {[...Array(t.rating)].map((_, j) => <FaStar key={j} className="text-yellow-400 text-sm" />)}
+          <div className="bg-dark-800 border border-dark-700 p-8">
+            <FaQuoteLeft className="text-gold-400 opacity-40 text-xl mb-5" />
+            <p className="text-warm-500 text-sm leading-relaxed mb-6 font-sans">"{testimonials[idx].text}"</p>
+            <div className="flex gap-0.5 mb-5">
+              {[...Array(testimonials[idx].rating)].map((_, j) => <FaStar key={j} className="text-gold-400 text-xs" />)}
             </div>
-            <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover mx-auto mb-2" />
-            <p className="font-semibold text-gray-900">{t.name}</p>
-            <p className="text-gray-400 text-sm">{t.role}</p>
+            <div className="border-t border-dark-700 pt-4">
+              <p className="font-serif font-light text-warm-300 tracking-wide">{testimonials[idx].name}</p>
+              <p className="text-warm-600 text-xs font-sans mt-0.5">{testimonials[idx].role}</p>
+            </div>
           </div>
-          <div className="flex justify-center gap-4 mt-5">
-            <button onClick={prev} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-primary-500 hover:text-white hover:border-primary-500 transition-colors">
+          <div className="flex justify-between items-center mt-5">
+            <button onClick={prev} className="w-10 h-10 border border-dark-600 hover:border-gold-400 flex items-center justify-center text-warm-400 hover:text-gold-400 transition-colors">
               <FaChevronLeft className="text-sm" />
             </button>
-            <div className="flex items-center gap-1.5">
+            <div className="flex gap-2">
               {testimonials.map((_, i) => (
-                <button key={i} onClick={() => setIdx(i)} className={`w-2 h-2 rounded-full transition-all ${i === idx ? 'bg-primary-500 w-5' : 'bg-gray-300'}`} />
+                <button key={i} onClick={() => setIdx(i)} className={`h-px transition-all ${i === idx ? 'w-8 bg-gold-400' : 'w-3 bg-dark-600'}`} />
               ))}
             </div>
-            <button onClick={next} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-primary-500 hover:text-white hover:border-primary-500 transition-colors">
+            <button onClick={next} className="w-10 h-10 border border-dark-600 hover:border-gold-400 flex items-center justify-center text-warm-400 hover:text-gold-400 transition-colors">
               <FaChevronRight className="text-sm" />
             </button>
           </div>
