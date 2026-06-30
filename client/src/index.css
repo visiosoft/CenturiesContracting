@@ -3,46 +3,43 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    @apply font-sans text-primary-500 antialiased bg-white;
-  }
-  h1, h2, h3, h4 {
-    @apply font-serif;
-  }
+  html { scroll-behavior: smooth; }
+  body { @apply font-sans antialiased bg-dark-900 text-warm-300; }
+  h1, h2, h3, h4 { @apply font-serif; }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-500 hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 inline-flex items-center gap-2;
+    @apply bg-gold-400 hover:bg-gold-300 text-dark-900 font-sans font-semibold px-7 py-3.5 transition-all duration-300 inline-flex items-center gap-2 tracking-widest uppercase text-xs;
   }
   .btn-outline {
-    @apply border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
+    @apply border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-dark-900 font-sans font-semibold px-7 py-3.5 transition-all duration-300 inline-flex items-center gap-2 tracking-widest uppercase text-xs;
   }
   .section-title {
-    @apply text-3xl md:text-4xl font-bold font-serif text-primary-500 mb-4;
+    @apply text-4xl md:text-5xl lg:text-6xl font-serif font-light text-warm-300 tracking-wide leading-tight;
   }
   .section-subtitle {
-    @apply text-lg text-gray-500 max-w-2xl mx-auto font-sans;
+    @apply text-xs text-warm-500 font-sans tracking-widest uppercase;
+  }
+  .gold-line {
+    @apply block w-10 h-px bg-gold-400;
   }
   .card {
-    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6;
+    @apply bg-dark-800 border border-dark-600 hover:border-gold-400 transition-colors duration-300 p-6;
   }
   .input-field {
-    @apply w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-300 focus:border-transparent transition-all duration-200 bg-gray-50;
+    @apply w-full border border-dark-600 bg-dark-800 px-4 py-3 text-warm-300 placeholder-warm-600 focus:outline-none focus:border-gold-400 transition-colors duration-200 font-sans text-sm;
   }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease both;
-}
+.animate-fadeInUp { animation: fadeInUp 0.8s ease both; }
 
-.hero-gradient {
-  background: linear-gradient(135deg, rgba(26,53,53,0.88) 0%, rgba(5,11,11,0.80) 100%);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
+.animate-fadeIn { animation: fadeIn 1.2s ease both; }

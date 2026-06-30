@@ -18,7 +18,7 @@ export default function Navbar() {
   const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -36,53 +36,57 @@ export default function Navbar() {
   const solid = scrolled || !isHome;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${solid ? 'bg-white shadow-md py-2' : 'bg-cream-100/90 backdrop-blur-sm py-4'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${solid ? 'bg-dark-900/95 backdrop-blur-sm border-b border-dark-700' : 'bg-transparent border-b border-gold-400/10'}`}>
+      {/* Top gold accent line */}
+      {!solid && <div className="absolute top-0 left-0 right-0 h-px bg-gold-400 opacity-60" />}
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between h-16 lg:h-20">
         {/* Logo */}
-        <button onClick={() => handleAnchor('#home')} className="flex items-center gap-2">
-          <img src={centuriesLogo} alt="Centuries logo" className="h-10 w-auto object-contain" />
-          <span className="text-xl font-bold text-primary-500 transition-colors">
-            Centuries
-          </span>
+        <button onClick={() => handleAnchor('#home')} className="flex items-center gap-3 group">
+          <img src={centuriesLogo} alt="Centuries logo" className="h-8 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
+          <div className="hidden sm:block">
+            <div className="font-serif text-warm-300 text-lg tracking-[0.2em] leading-none">CENTURIES</div>
+            <div className="text-gold-400 text-[8px] tracking-[0.4em] uppercase font-sans">Construction</div>
+          </div>
         </button>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-6">
-          <button onClick={() => handleAnchor('#home')} className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Home</button>
+        <nav className="hidden lg:flex items-center gap-8">
+          <button onClick={() => handleAnchor('#home')} className="text-xs font-sans tracking-widest uppercase text-warm-400 hover:text-gold-400 transition-colors duration-200">Home</button>
           {anchorLinks.map(l => (
-            <button key={l.href} onClick={() => handleAnchor(l.href)} className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">
+            <button key={l.href} onClick={() => handleAnchor(l.href)} className="text-xs font-sans tracking-widest uppercase text-warm-400 hover:text-gold-400 transition-colors duration-200">
               {l.label}
             </button>
           ))}
-          <button onClick={() => { navigate('/gallery'); window.scrollTo(0,0); }} className="text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">Gallery</button>
+          <button onClick={() => { navigate('/gallery'); window.scrollTo(0,0); }} className="text-xs font-sans tracking-widest uppercase text-warm-400 hover:text-gold-400 transition-colors duration-200">Gallery</button>
         </nav>
 
         {/* CTA */}
-        <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:+971567601154" className="flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-gold-500 transition-colors">
-            <FaPhone className="text-xs" /> 0567601154
+        <div className="hidden lg:flex items-center gap-5">
+          <a href="tel:+971567601154" className="flex items-center gap-2 text-xs font-sans tracking-widest text-warm-400 hover:text-gold-400 transition-colors">
+            <FaPhone className="text-gold-400 text-xs" /> 0567601154
           </a>
-          <Link to="/quote" className="btn-primary text-sm py-2 px-4">
-            Get Free Quote
+          <Link to="/quote" className="btn-primary text-xs py-2.5 px-5">
+            Free Quote
           </Link>
         </div>
 
         {/* Mobile toggle */}
-        <button className="lg:hidden text-2xl text-primary-500" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button className="lg:hidden text-xl text-warm-300" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
       {/* Mobile menu */}
       <div className={`lg:hidden transition-all duration-300 overflow-hidden ${open ? 'max-h-screen' : 'max-h-0'}`}>
-        <nav className="bg-white shadow-lg px-6 py-4 flex flex-col gap-3">
-          <button onClick={() => { setOpen(false); handleAnchor('#home'); }} className="text-left text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">Home</button>
+        <nav className="bg-dark-900 border-t border-dark-700 px-6 py-5 flex flex-col gap-4">
+          <button onClick={() => { setOpen(false); handleAnchor('#home'); }} className="text-left text-xs tracking-widest uppercase text-warm-400 hover:text-gold-400 font-sans py-1 border-b border-dark-700 pb-3">Home</button>
           {anchorLinks.map(l => (
-            <button key={l.href} onClick={() => handleAnchor(l.href)} className="text-left text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">
+            <button key={l.href} onClick={() => handleAnchor(l.href)} className="text-left text-xs tracking-widest uppercase text-warm-400 hover:text-gold-400 font-sans py-1 border-b border-dark-700 pb-3">
               {l.label}
             </button>
           ))}
-          <button onClick={() => { setOpen(false); navigate('/gallery'); window.scrollTo(0,0); }} className="text-left text-gray-700 font-medium hover:text-primary-600 py-1 border-b border-gray-100">Gallery</button>
+          <button onClick={() => { setOpen(false); navigate('/gallery'); window.scrollTo(0,0); }} className="text-left text-xs tracking-widest uppercase text-warm-400 hover:text-gold-400 font-sans py-1 border-b border-dark-700 pb-3">Gallery</button>
           <Link to="/quote" onClick={() => setOpen(false)} className="btn-primary justify-center mt-2">
             Get Free Quote
           </Link>

@@ -40,16 +40,17 @@ export default function LeadForm({ compact = false }) {
   };
 
   return (
-    <div className={`bg-white rounded-2xl shadow-2xl p-6 sm:p-8 ${compact ? 'max-w-md w-full mx-auto' : 'w-full'}`}>
-      <h3 className="font-serif text-2xl font-bold text-primary-500 mb-1">
+    <div className={`bg-dark-800 border border-dark-600 p-6 sm:p-8 ${compact ? 'max-w-md w-full mx-auto' : 'w-full'}`}>
+      <div className="h-px bg-gold-400 opacity-50 mb-6" />
+      <h3 className="font-serif font-light text-2xl text-warm-300 tracking-wide mb-1">
         {compact ? 'Get Your Free Quote' : 'Send Us a Message'}
       </h3>
-      <p className="text-gray-400 text-sm mb-5 font-sans">
-        {compact ? 'Fill in the form and we\'ll call you within 24 hours.' : 'We\'d love to hear about your project.'}
+      <p className="text-warm-600 text-xs tracking-widest uppercase font-sans mb-6">
+        {compact ? "We'll call you within 24 hours" : "We'd love to hear about your project"}
       </p>
 
       {error && (
-        <div className="mb-4 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
+        <div className="mb-4 bg-red-900/30 border border-red-800 text-red-400 text-xs px-4 py-3">
           {error}
         </div>
       )}
@@ -76,7 +77,7 @@ export default function LeadForm({ compact = false }) {
           />
           <select
             name="service" value={form.service} onChange={onChange}
-            className="input-field text-gray-700"
+            className="input-field"
           >
             <option value="">Select a Service</option>
             {services.map(s => <option key={s} value={s}>{s}</option>)}
@@ -96,7 +97,7 @@ export default function LeadForm({ compact = false }) {
           {loading ? <><FaSpinner className="animate-spin" /> Sending...</> : compact ? 'Request Free Quote →' : 'Send Message →'}
         </button>
 
-        <p className="text-xs text-gray-400 text-center">
+        <p className="text-xs text-warm-600 text-center tracking-wider font-sans">
           No spam. We respect your privacy. 100% free consultation.
         </p>
       </form>
