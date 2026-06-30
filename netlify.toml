@@ -14,13 +14,6 @@
   status = 200
   force = true
 
-# Serve index2.html directly (must be before SPA catch-all)
-[[redirects]]
-  from = "/index2.html"
-  to = "/index2.html"
-  status = 200
-  force = true
-
 # SPA fallback — must be last
 # Note: /projects/* is served directly from client/public/projects/ by Netlify
 [[redirects]]
