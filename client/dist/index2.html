@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centuries Construction - Dubai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0e0d0b;color:#f0eae0;font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px 56px;background:rgba(14,13,11,0);border-bottom:1px solid rgba(196,160,106,0);transition:background .4s,border-color .4s,backdrop-filter .4s}
+nav.scrolled{background:rgba(14,13,11,0.94);backdrop-filter:blur(14px);border-bottom-color:rgba(196,160,106,0.12)}
+.nav-links,.nav-right{display:flex;gap:40px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,234,224,.5)}
+.nav-right{justify-content:flex-end}
+.nav-links a:hover,.nav-right a:hover{color:#c4a06a;transition:color .2s}
+.nav-logo{text-align:center}
+.nav-logo-name{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.52em;font-weight:400;text-transform:uppercase;color:#f0eae0;line-height:1}
+.nav-logo-sub{font-size:7px;letter-spacing:.6em;text-transform:uppercase;color:#c4a06a;margin-top:3px}
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(148deg,#4a3820 0%,#2e2010 35%,#1a1208 65%,#0e0d0b 100%)}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,13,11,.25) 0%,rgba(14,13,11,.05) 40%,rgba(14,13,11,.8) 100%)}
+.hero-loc{position:absolute;top:48px;left:56px;font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:rgba(196,160,106,.65)}
+.hero-count{position:absolute;top:48px;right:56px;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:rgba(240,234,224,.28)}
+.hero-rule{position:absolute;right:56px;top:80px;bottom:120px;width:1px;background:linear-gradient(to bottom,transparent,rgba(196,160,106,.25) 20%,rgba(196,160,106,.25) 80%,transparent)}
+.hero-inner{position:relative;z-index:2;padding:0 56px 80px;width:100%;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(64px,9vw,108px);font-weight:300;line-height:.88;color:#f0eae0;margin-bottom:36px;letter-spacing:-.02em;animation:heroUp .9s ease both .2s}
+.hero-h1 em{display:block;font-style:italic;font-weight:300}
+.hero-h1 b{display:block;font-weight:400}
+.hero-link{display:inline-block;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:#c4a06a;border-bottom:1px solid rgba(196,160,106,.45);padding-bottom:5px;animation:heroUp .9s ease both .45s}
+.hero-link:hover{opacity:.7}
+.hero-desc{max-width:280px;text-align:right;padding-bottom:8px;animation:heroIn 1s ease both .6s}
+.hero-desc p{font-size:13px;font-weight:300;line-height:1.9;color:rgba(240,234,224,.48)}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,rgba(196,160,106,.55))}
+.hero-scroll-txt{font-size:7px;letter-spacing:.5em;text-transform:uppercase;color:rgba(196,160,106,.45)}
+.panels{display:grid;grid-template-columns:repeat(3,1fr);height:100vh}
+.panel{position:relative;overflow:hidden;border-right:1px solid rgba(196,160,106,.1)}
+.panel:last-child{border-right:none}
+.panel-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,13,11,.88) 0%,rgba(14,13,11,.08) 65%)}
+.panel-num{position:absolute;top:48px;left:40px;font-size:9px;letter-spacing:.45em;text-transform:uppercase;color:rgba(196,160,106,.55)}
+.panel-body{position:absolute;bottom:56px;left:40px;right:40px}
+.panel-tag{font-size:8px;letter-spacing:.48em;text-transform:uppercase;color:#c4a06a;margin-bottom:18px;font-weight:500}
+.panel-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;font-style:italic;color:#f0eae0;line-height:1.05;margin-bottom:24px}
+.panel-link{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(240,234,224,.45);border-bottom:1px solid rgba(240,234,224,.18);padding-bottom:3px}
+.panel-link:hover{color:#c4a06a}
+.about{padding:120px 56px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;border-top:1px solid rgba(196,160,106,.1)}
+.sec-tag{font-size:8px;letter-spacing:.52em;text-transform:uppercase;color:#c4a06a;margin-bottom:32px}
+.serif-h{font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1;color:#f0eae0;font-style:italic}
+.gold-link{font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:#c4a06a;border-bottom:1px solid rgba(196,160,106,.38);padding-bottom:4px}
+.gold-link:hover{opacity:.7}
+.about p{font-size:15px;font-weight:300;line-height:1.95;color:rgba(240,234,224,.52);margin-bottom:32px}
+.proj-hdr{border-top:1px solid rgba(196,160,106,.1)}
+.proj-row{display:flex;align-items:center;justify-content:space-between;padding:48px 56px 40px}
+.proj-row h2{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;font-style:italic;color:#f0eae0}
+.strip{position:relative;height:68vh;overflow:hidden;cursor:pointer;transition:opacity .3s}
+.strip:hover{opacity:.88}
+.strip-ov{position:absolute;inset:0}
+.strip-body{position:absolute;bottom:56px}
+.strip-tag{font-size:8px;letter-spacing:.52em;text-transform:uppercase;color:#c4a06a;margin-bottom:14px}
+.strip-name{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.5vw,52px);font-weight:300;font-style:italic;color:#f0eae0;line-height:1}
+.strip-yr{position:absolute;bottom:56px;font-size:8px;letter-spacing:.38em;text-transform:uppercase;color:rgba(240,234,224,.3)}
+.stats{padding:72px 56px;border-top:1px solid rgba(196,160,106,.1);border-bottom:1px solid rgba(196,160,106,.1);display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,64px);font-weight:300;color:#c4a06a;line-height:1}
+.stat-l{font-size:8px;letter-spacing:.42em;text-transform:uppercase;color:rgba(240,234,224,.42);margin-top:10px}
+.svc{padding:120px 56px;border-top:1px solid rgba(196,160,106,.1)}
+.svc-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(196,160,106,.08)}
+.svc-card{background:#0e0d0b;padding:48px 36px;border-left:2px solid rgba(196,160,106,.06);transition:border-color .3s,background .3s}
+.svc-card:first-child{border-left-color:#c4a06a}
+.svc-card:hover{background:#14120f;border-left-color:rgba(196,160,106,.4)}
+.svc-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:rgba(196,160,106,.1);line-height:1;margin-bottom:20px}
+.svc-nm{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#f0eae0;margin-bottom:14px;font-weight:400}
+.svc-d{font-size:13px;font-weight:300;line-height:1.8;color:rgba(240,234,224,.45)}
+.testi{padding:100px 56px;border-top:1px solid rgba(196,160,106,.1)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(196,160,106,.06)}
+.testi-card{background:#0e0d0b;padding:40px 32px;border-top:2px solid rgba(196,160,106,.06);transition:border-color .3s}
+.testi-card:hover{border-top-color:rgba(196,160,106,.35)}
+.testi-q{font-family:'Cormorant Garamond',serif;font-size:48px;color:rgba(196,160,106,.2);line-height:.7;margin-bottom:20px}
+.testi-t{font-size:14px;font-weight:300;line-height:1.85;color:rgba(240,234,224,.55);margin-bottom:28px}
+.testi-nm{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#c4a06a;margin-bottom:4px}
+.testi-r{font-size:10px;color:rgba(240,234,224,.28);letter-spacing:.08em}
+.connect{padding:120px 56px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;border-top:1px solid rgba(196,160,106,.1)}
+.cd{font-size:8px;letter-spacing:.42em;text-transform:uppercase;color:rgba(196,160,106,.6);margin-bottom:8px}
+.cv{font-size:13px;font-weight:300;color:rgba(240,234,224,.5);margin-bottom:24px}
+.form-row{padding:22px 0;border-bottom:1px solid rgba(196,160,106,.12)}
+.form-lbl{font-size:8px;letter-spacing:.44em;text-transform:uppercase;color:rgba(240,234,224,.32);margin-bottom:10px}
+.form-row select,.form-row input,.form-row textarea{background:transparent;border:none;color:rgba(240,234,224,.65);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;width:100%;outline:none;appearance:none}
+.form-row textarea{resize:none;height:80px}
+.form-row option{background:#0e0d0b}
+.form-sub{padding:32px 0;display:flex;align-items:center;gap:20px}
+.btn-g{background:#c4a06a;color:#0e0d0b;border:none;font-size:10px;letter-spacing:.38em;text-transform:uppercase;padding:16px 48px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:background .2s}
+.btn-g:hover{background:#d4b07a}.btn-g:disabled{opacity:.5;cursor:not-allowed}
+#fmsg{font-size:11px}
+footer{border-top:1px solid rgba(196,160,106,.1);padding:40px 56px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.ft-n{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.42em;font-weight:400;text-transform:uppercase;color:rgba(240,234,224,.45);margin-bottom:4px}
+.ft-s{font-size:7px;letter-spacing:.58em;text-transform:uppercase;color:#c4a06a}
+.ft-copy{font-size:10px;color:rgba(240,234,224,.22);letter-spacing:.08em;text-align:center}
+.ft-links{display:flex;justify-content:flex-end;gap:28px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,234,224,.42)}
+.ft-links a:hover{color:#c4a06a;transition:color .2s}
+@keyframes heroUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroIn{from{opacity:0}to{opacity:1}}
+.fi{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.fi.v{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+nav{padding:18px 24px}.nav-links,.nav-right{display:none}
+.hero-inner{flex-direction:column;align-items:flex-start;padding:0 24px 60px;gap:20px}
+.hero-desc{text-align:left;max-width:100%}.hero-rule{display:none}.hero-loc{left:24px}.hero-count{right:24px}
+.panels{grid-template-columns:1fr;height:auto}.panel{height:60vh;border-right:none;border-bottom:1px solid rgba(196,160,106,.1)}
+.about,.connect,.svc,.testi{padding:72px 24px}
+.about,.connect{grid-template-columns:1fr;gap:40px}
+.proj-row{padding:40px 24px 32px}
+.strip-yr{left:24px !important;right:auto !important}
+.stats{grid-template-columns:repeat(2,1fr);padding:56px 24px}
+.svc-grid,.testi-grid{grid-template-columns:1fr}
+footer{grid-template-columns:1fr;gap:20px;padding:32px 24px;text-align:center}.ft-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="nav-links"><a href="#about">About</a><a href="#services">Services</a></div>
+  <div class="nav-logo"><div class="nav-logo-name">CENTURIES</div><div class="nav-logo-sub">CONSTRUCTION</div></div>
+  <div class="nav-right"><a href="#projects">Projects</a><a href="#connect">Contact</a></div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg" style="background:url('/projects/Dubai%20Hills-%20golf%20palace%20villa/33d69fba-8c6e-4e92-8ad8-f0968a42d053.jpeg') center/cover no-repeat"></div><div class="hero-fade"></div>
+  <div class="hero-loc">Dubai &middot; UAE</div>
+  <div class="hero-count">01 / 04</div>
+  <div class="hero-rule"></div>
+  <div class="hero-inner">
+    <div>
+      <h1 class="hero-h1"><em>Built for</em><b>Centuries.</b></h1>
+      <a href="/gallery" class="hero-link">View Our Work</a>
+    </div>
+    <div class="hero-desc"><p>Dubai's premier design and build studio &mdash; villas, landscapes, and commercial spaces crafted for eternity.</p></div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span class="hero-scroll-txt">Scroll</span></div>
+</section>
+
+<div class="panels">
+  <div class="panel" style="background:url('/projects/Jumaira%20villa/Living-Room_01.jpg') center/cover no-repeat">
+    <div class="panel-ov"></div><div class="panel-num">01</div>
+    <div class="panel-body"><div class="panel-tag">Villa Renovation</div><div class="panel-title">Private<br>Residences</div><a href="#services" class="panel-link">Know More</a></div>
+  </div>
+  <div class="panel" style="background:url('/projects/Land%20Scape/WhatsApp%20Image%202026-06-15%20at%206.17.04%20PM.jpeg') center/cover no-repeat">
+    <div class="panel-ov"></div><div class="panel-num">02</div>
+    <div class="panel-body"><div class="panel-tag">Landscaping</div><div class="panel-title">Gardens &amp;<br>Exteriors</div><a href="#services" class="panel-link">Know More</a></div>
+  </div>
+  <div class="panel" style="background:url('/projects/AL-KEFAF%20TOWER/12b32879-bc59-48cd-941d-2a831cd2b837.jpeg') center/cover no-repeat">
+    <div class="panel-ov"></div><div class="panel-num">03</div>
+    <div class="panel-body"><div class="panel-tag">Commercial</div><div class="panel-title">Offices &amp;<br>Showrooms</div><a href="#services" class="panel-link">Know More</a></div>
+  </div>
+</div>
+
+<section class="about fi" id="about">
+  <div>
+    <div class="sec-tag">The Company</div>
+    <h2 class="serif-h" style="font-size:clamp(40px,5vw,62px);margin-bottom:40px">Built on a Passion<br>for Craft.</h2>
+    <a href="#connect" class="gold-link">Know More About Us</a>
+  </div>
+  <div>
+    <p>Centuries Construction has delivered exceptional design and build projects across Dubai &mdash; from private villas in Al Barari to luxury commercial spaces in Business Bay. Our work stands for generations.</p>
+    <p>Our designers, architects, and craftspeople share one ideology: outstanding spaces don't happen by accident &mdash; they are built with intention, precision, and care.</p>
+  </div>
+</section>
+
+<div id="projects" class="proj-hdr">
+  <div class="proj-row"><h2>Selected Projects</h2><a href="/gallery" class="gold-link">View All</a></div>
+  <div class="strip fi" onclick="location.href='/gallery'" style="background:url('/projects/Al-Barsha%20villa/0b0e74fd-5292-48d5-9959-5bcf4768c79c.jpeg') center/cover no-repeat">
+    <div class="strip-ov" style="background:linear-gradient(90deg,rgba(14,13,11,.72) 0%,rgba(14,13,11,.1) 55%)"></div>
+    <div class="strip-body" style="left:56px"><div class="strip-tag">Villa Renovation &middot; Al Barsha</div><div class="strip-name">Al-Barsha Villa</div></div>
+    <div class="strip-yr" style="right:56px">2024</div>
+  </div>
+  <div class="strip fi" onclick="location.href='/gallery'" style="background:url('/projects/Land%20Scape/WhatsApp%20Image%202026-06-15%20at%206.17.06%20PM%20(1).jpeg') center/cover no-repeat">
+    <div class="strip-ov" style="background:linear-gradient(270deg,rgba(14,13,11,.72) 0%,rgba(14,13,11,.1) 55%)"></div>
+    <div class="strip-body" style="right:56px;text-align:right"><div class="strip-tag">Landscaping &middot; Dubai</div><div class="strip-name">Landscape Design</div></div>
+    <div class="strip-yr" style="left:56px">2025</div>
+  </div>
+  <div class="strip fi" onclick="location.href='/gallery'" style="background:url('/projects/Arabian%20Ranches/3D/004-Dining%2001.jpg') center/cover no-repeat">
+    <div class="strip-ov" style="background:linear-gradient(90deg,rgba(14,13,11,.72) 0%,rgba(14,13,11,.1) 55%)"></div>
+    <div class="strip-body" style="left:56px"><div class="strip-tag">Villa Fit-Out &middot; Arabian Ranches</div><div class="strip-name">Arabian Ranches Villa</div></div>
+    <div class="strip-yr" style="right:56px">2025</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="fi"><div class="stat-n">10+</div><div class="stat-l">Years of Excellence</div></div>
+  <div class="fi"><div class="stat-n">150+</div><div class="stat-l">Projects Delivered</div></div>
+  <div class="fi"><div class="stat-n">06</div><div class="stat-l">Core Services</div></div>
+  <div class="fi"><div class="stat-n">RTA</div><div class="stat-l">Approved Contractor</div></div>
+</div>
+
+<section class="svc" id="services">
+  <div class="svc-head">
+    <h2 class="serif-h" style="font-size:clamp(36px,4.5vw,56px)">What We<br>Build</h2>
+    <span style="font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:rgba(240,234,224,.3)">06 Services</span>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card fi"><div class="svc-n">01</div><div class="svc-nm">Design &amp; Build</div><p class="svc-d">End-to-end project delivery from concept through completion &mdash; design, execution, and handover.</p></div>
+    <div class="svc-card fi"><div class="svc-n">02</div><div class="svc-nm">Villa Renovation</div><p class="svc-d">Transforming private residences across Dubai's most prestigious communities with refined craftsmanship.</p></div>
+    <div class="svc-card fi"><div class="svc-n">03</div><div class="svc-nm">Landscape &amp; Exterior</div><p class="svc-d">Pools, gardens, paving, and irrigation &mdash; total outdoor transformation for villas and compounds.</p></div>
+    <div class="svc-card fi"><div class="svc-n">04</div><div class="svc-nm">Apartment Fit-Out</div><p class="svc-d">High-spec apartment interiors delivered on time and on budget across all Dubai districts.</p></div>
+    <div class="svc-card fi"><div class="svc-n">05</div><div class="svc-nm">Commercial Fit-Out</div><p class="svc-d">Offices, showrooms, and retail spaces built to impress clients and inspire teams every day.</p></div>
+    <div class="svc-card fi"><div class="svc-n">06</div><div class="svc-nm">Joinery &amp; Finishing</div><p class="svc-d">Custom cabinetry, flooring, painting, and detail work &mdash; every surface executed to perfection.</p></div>
+  </div>
+</section>
+
+<section class="testi">
+  <h2 class="serif-h" style="font-size:clamp(36px,4vw,52px);margin-bottom:64px">What Our Clients Say</h2>
+  <div class="testi-grid">
+    <div class="testi-card fi"><div class="testi-q">&ldquo;</div><p class="testi-t">The team transformed our villa beyond what we imagined. Every detail was executed with precision and care. We wouldn't go to anyone else.</p><div class="testi-nm">Mohammed Al Rashid</div><div class="testi-r">Villa Owner &middot; Arabian Ranches</div></div>
+    <div class="testi-card fi"><div class="testi-q">&ldquo;</div><p class="testi-t">Professional from day one. Project manager kept us informed and the quality of finishing is exceptional. Our JBR apartment looks incredible.</p><div class="testi-nm">Fatima Al Mansoori</div><div class="testi-r">Apartment Owner &middot; JBR, Dubai</div></div>
+    <div class="testi-card fi"><div class="testi-q">&ldquo;</div><p class="testi-t">Centuries delivered our Business Bay office on time and within budget. The craftsmanship is world-class and clients consistently compliment the space.</p><div class="testi-nm">Ahmed Hassan</div><div class="testi-r">Director &middot; Business Bay, Dubai</div></div>
+  </div>
+</section>
+
+<section class="connect" id="connect">
+  <div>
+    <div class="sec-tag">Connect</div>
+    <h2 class="serif-h" style="font-size:clamp(40px,5vw,62px);margin-bottom:48px">Start Your<br>Project.</h2>
+    <div class="cd">Location</div><div class="cv">Al Quoz, Dubai, UAE</div>
+    <div class="cd">Call Us</div><div class="cv"><a href="tel:+971567601154" style="color:inherit">+971 56 760 1154</a></div>
+    <div class="cd">Email</div><div class="cv"><a href="mailto:info@centuriescontracting.com" style="color:inherit">info@centuriescontracting.com</a></div>
+    <div class="cd">Hours</div><div class="cv">Mon &ndash; Sat, 8am &ndash; 7pm</div>
+  </div>
+  <form id="cf">
+    <div class="form-row"><div class="form-lbl">Service</div><select name="service"><option value="">Select a Service</option><option>Design &amp; Build</option><option>Villa Renovation</option><option>Landscape &amp; Exterior</option><option>Apartment Fit-Out</option><option>Commercial Fit-Out</option><option>Joinery &amp; Finishing</option></select></div>
+    <div class="form-row"><div class="form-lbl">Full Name</div><input type="text" name="name" placeholder="Your name" required></div>
+    <div class="form-row"><div class="form-lbl">Phone</div><input type="tel" name="phone" placeholder="+971 ..."></div>
+    <div class="form-row"><div class="form-lbl">Email</div><input type="email" name="email" placeholder="your@email.com" required></div>
+    <div class="form-row"><div class="form-lbl">Message</div><textarea name="message" placeholder="Tell us about your project..."></textarea></div>
+    <div class="form-sub"><button type="submit" class="btn-g" id="sb">Submit</button><span id="fmsg"></span></div>
+  </form>
+</section>
+
+<footer>
+  <div><div class="ft-n">CENTURIES</div><div class="ft-s">CONSTRUCTION</div></div>
+  <div class="ft-copy">&copy; 2026 Centuries Construction &middot; Dubai, UAE</div>
+  <div class="ft-links"><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+document.getElementById('cf').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const b=document.getElementById('sb'),m=document.getElementById('fmsg');
+  const d=Object.fromEntries(new FormData(e.target));
+  b.textContent='Sending...';b.disabled=true;m.textContent='';
+  try{
+    const r=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,source:'index2'})});
+    if(r.ok){m.style.color='#c4a06a';m.textContent='Thank you - we will be in touch within 24 hours.';e.target.reset();}
+    else throw 0;
+  }catch{m.style.color='#e07070';m.textContent='Please call +971 56 760 1154.';}
+  b.textContent='Submit';b.disabled=false;
+});
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v');});},{threshold:0.1});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+</script>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/971567601154" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Floating Call Button -->
+<a href="tel:+971567601154" style="position:fixed;bottom:28px;left:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:#c4a06a;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#0e0d0b"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+</body>
+</html>

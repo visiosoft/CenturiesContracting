@@ -14,6 +14,12 @@
   status = 200
   force = true
 
+# Landing page
+[[redirects]]
+  from = "/"
+  to = "/index2.html"
+  status = 200
+
 # SPA fallback — must be last
 # Note: /projects/* is served directly from client/public/projects/ by Netlify
 [[redirects]]

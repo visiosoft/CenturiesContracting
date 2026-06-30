@@ -128,14 +128,14 @@ footer{grid-template-columns:1fr;gap:20px;padding:32px 24px;text-align:center}.f
 </nav>
 
 <section class="hero" id="home">
-  <div class="hero-bg"></div><div class="hero-fade"></div>
+  <div class="hero-bg" style="background:url('/projects/Dubai%20Hills-%20golf%20palace%20villa/33d69fba-8c6e-4e92-8ad8-f0968a42d053.jpeg') center/cover no-repeat"></div><div class="hero-fade"></div>
   <div class="hero-loc">Dubai &middot; UAE</div>
   <div class="hero-count">01 / 04</div>
   <div class="hero-rule"></div>
   <div class="hero-inner">
     <div>
       <h1 class="hero-h1"><em>Built for</em><b>Centuries.</b></h1>
-      <a href="#projects" class="hero-link">View Our Work</a>
+      <a href="/gallery" class="hero-link">View Our Work</a>
     </div>
     <div class="hero-desc"><p>Dubai's premier design and build studio &mdash; villas, landscapes, and commercial spaces crafted for eternity.</p></div>
   </div>
@@ -143,15 +143,15 @@ footer{grid-template-columns:1fr;gap:20px;padding:32px 24px;text-align:center}.f
 </section>
 
 <div class="panels">
-  <div class="panel" style="background:linear-gradient(152deg,#5a4030 0%,#3d2c18 45%,#2a1e10 100%)">
+  <div class="panel" style="background:url('/projects/Jumaira%20villa/Living-Room_01.jpg') center/cover no-repeat">
     <div class="panel-ov"></div><div class="panel-num">01</div>
     <div class="panel-body"><div class="panel-tag">Villa Renovation</div><div class="panel-title">Private<br>Residences</div><a href="#services" class="panel-link">Know More</a></div>
   </div>
-  <div class="panel" style="background:linear-gradient(142deg,#1a3018 0%,#243d1f 45%,#304d2a 100%)">
+  <div class="panel" style="background:url('/projects/Land%20Scape/WhatsApp%20Image%202026-06-15%20at%206.17.04%20PM.jpeg') center/cover no-repeat">
     <div class="panel-ov"></div><div class="panel-num">02</div>
     <div class="panel-body"><div class="panel-tag">Landscaping</div><div class="panel-title">Gardens &amp;<br>Exteriors</div><a href="#services" class="panel-link">Know More</a></div>
   </div>
-  <div class="panel" style="background:linear-gradient(148deg,#1c1f2e 0%,#262a40 45%,#1e253a 100%)">
+  <div class="panel" style="background:url('/projects/AL-KEFAF%20TOWER/12b32879-bc59-48cd-941d-2a831cd2b837.jpeg') center/cover no-repeat">
     <div class="panel-ov"></div><div class="panel-num">03</div>
     <div class="panel-body"><div class="panel-tag">Commercial</div><div class="panel-title">Offices &amp;<br>Showrooms</div><a href="#services" class="panel-link">Know More</a></div>
   </div>
@@ -171,17 +171,17 @@ footer{grid-template-columns:1fr;gap:20px;padding:32px 24px;text-align:center}.f
 
 <div id="projects" class="proj-hdr">
   <div class="proj-row"><h2>Selected Projects</h2><a href="/gallery" class="gold-link">View All</a></div>
-  <div class="strip fi" onclick="location.href='/gallery'" style="background:linear-gradient(152deg,#5a4030 0%,#3d2c18 45%,#2a1e10 100%)">
+  <div class="strip fi" onclick="location.href='/gallery'" style="background:url('/projects/Al-Barsha%20villa/0b0e74fd-5292-48d5-9959-5bcf4768c79c.jpeg') center/cover no-repeat">
     <div class="strip-ov" style="background:linear-gradient(90deg,rgba(14,13,11,.72) 0%,rgba(14,13,11,.1) 55%)"></div>
-    <div class="strip-body" style="left:56px"><div class="strip-tag">Villa Renovation &middot; Al Barari</div><div class="strip-name">Al Barari Residence</div></div>
+    <div class="strip-body" style="left:56px"><div class="strip-tag">Villa Renovation &middot; Al Barsha</div><div class="strip-name">Al-Barsha Villa</div></div>
     <div class="strip-yr" style="right:56px">2024</div>
   </div>
-  <div class="strip fi" onclick="location.href='/gallery'" style="background:linear-gradient(142deg,#1a3018 0%,#243d1f 50%,#304d2a 100%)">
+  <div class="strip fi" onclick="location.href='/gallery'" style="background:url('/projects/Land%20Scape/WhatsApp%20Image%202026-06-15%20at%206.17.06%20PM%20(1).jpeg') center/cover no-repeat">
     <div class="strip-ov" style="background:linear-gradient(270deg,rgba(14,13,11,.72) 0%,rgba(14,13,11,.1) 55%)"></div>
-    <div class="strip-body" style="right:56px;text-align:right"><div class="strip-tag">Landscaping &middot; Emirates Hills</div><div class="strip-name">Emirates Hills Garden</div></div>
+    <div class="strip-body" style="right:56px;text-align:right"><div class="strip-tag">Landscaping &middot; Dubai</div><div class="strip-name">Landscape Design</div></div>
     <div class="strip-yr" style="left:56px">2025</div>
   </div>
-  <div class="strip fi" onclick="location.href='/gallery'" style="background:linear-gradient(148deg,#1c1f2e 0%,#262a40 50%,#1e253a 100%)">
+  <div class="strip fi" onclick="location.href='/gallery'" style="background:url('/projects/Arabian%20Ranches/3D/004-Dining%2001.jpg') center/cover no-repeat">
     <div class="strip-ov" style="background:linear-gradient(90deg,rgba(14,13,11,.72) 0%,rgba(14,13,11,.1) 55%)"></div>
     <div class="strip-body" style="left:56px"><div class="strip-tag">Villa Fit-Out &middot; Arabian Ranches</div><div class="strip-name">Arabian Ranches Villa</div></div>
     <div class="strip-yr" style="right:56px">2025</div>
@@ -261,5 +261,16 @@ document.getElementById('cf').addEventListener('submit',async e=>{
 const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v');});},{threshold:0.1});
 document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
 </script>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/971567601154" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Floating Call Button -->
+<a href="tel:+971567601154" style="position:fixed;bottom:28px;left:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:#c4a06a;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#0e0d0b"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
 </body>
 </html>
